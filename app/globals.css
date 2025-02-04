@@ -2,17 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* global */
-
-:root {
-  --teal: #183D3D;
-  --green: #A7D397;
-  --gray: #F4F4F4;
-  --yellow: #FFA600;
+body {
+  @apply bg-gray text-[#4C4C4C];
 }
-
-
-/* custom classes */
 
 .show {
   @apply opacity-100 visible;

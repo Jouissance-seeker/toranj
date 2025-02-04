@@ -21,5 +21,5 @@ export default {
       },
     },
   },
-  plugins: [scrollbarHide, aspectRatio],
+  plugins: [scrollbarHide],
 } satisfies Config;

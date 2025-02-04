@@ -1,10 +1,10 @@
-import { cn } from '@/utils/cn';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaHeart, FaHome, FaShoppingCart } from 'react-icons/fa';
 import { FaBagShopping } from 'react-icons/fa6';
 import { PiShoppingBagOpenFill } from 'react-icons/pi';
+import { cn } from '@/utils/cn';
 
 export function Header() {
   const pathname = usePathname();
@@ -38,11 +38,11 @@ export function Header() {
 
   return (
     <header className="container">
-      <div className="bg-teal flex justify-between items-center my-6 p-4 rounded-2xl">
+      <div className="my-6 flex items-center justify-between rounded-2xl bg-teal p-4">
         {/* logo */}
-        <Link href={'/'}>
+        <Link href="/">
           <Image
-            src={'/images/template/logo.svg'}
+            src="/images/template/logo.svg"
             width={100}
             height={50}
             alt="لوگو"
@@ -64,14 +64,14 @@ export function Header() {
                   )}
                 >
                   {item.icon}
-                  <p className="font-bold">{item.text}</p>
+                  <p className="font-medium">{item.text}</p>
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
         {/* login / profile */}
-        <button className="text-teal bg-green font-medium px-4 py-2.5 rounded-lg">
+        <button className="rounded-lg bg-green px-4 py-2.5 font-medium text-teal">
           ورود / ثبت نام
         </button>
       </div>

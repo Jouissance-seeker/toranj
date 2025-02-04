@@ -1,11 +1,11 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function Home() {
   return (
     <section
       className="container"
       style={{
-        clipPath: "ellipse(100% 100% at 50% 0%)",
+        clipPath: 'ellipse(100% 100% at 50% 0%)',
       }}
     >
       <div className="bg-teal w-full relative rounded-t-2xl size-full h-[500px] lg:h-[450px]">

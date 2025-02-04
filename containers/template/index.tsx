@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { ReactNode } from "react";
-import { Header } from "./header";
-import { Footer } from "./footer";
+import { ReactNode } from 'react';
+import { Header } from './header';
+import { Footer } from './footer';
 
 interface ITemplateProps {
   children: ReactNode;

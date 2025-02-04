@@ -1,38 +1,38 @@
-import { cn } from "@/utils/cn";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { FaHeart, FaHome, FaShoppingCart } from "react-icons/fa";
-import { FaBagShopping } from "react-icons/fa6";
-import { PiShoppingBagOpenFill } from "react-icons/pi";
+import { cn } from '@/utils/cn';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { FaHeart, FaHome, FaShoppingCart } from 'react-icons/fa';
+import { FaBagShopping } from 'react-icons/fa6';
+import { PiShoppingBagOpenFill } from 'react-icons/pi';
 
 export function Header() {
   const pathname = usePathname();
   const navItems = [
     {
-      text: "خانه",
+      text: 'خانه',
       icon: <FaHome size={22} />,
-      path: "/",
+      path: '/',
     },
     {
-      text: "محصولات",
+      text: 'محصولات',
       icon: <FaBagShopping size={22} />,
-      path: "/explore",
+      path: '/explore',
     },
     {
-      text: "سفارشات",
+      text: 'سفارشات',
       icon: <PiShoppingBagOpenFill size={22} />,
-      path: "/orders",
+      path: '/orders',
     },
     {
-      text: "علاقه مندی",
+      text: 'علاقه مندی',
       icon: <FaHeart size={22} />,
-      path: "/favorites",
+      path: '/favorites',
     },
     {
-      text: "سبد خرید",
+      text: 'سبد خرید',
       icon: <FaShoppingCart size={22} />,
-      path: "/cart",
+      path: '/cart',
     },
   ];
 
@@ -40,8 +40,13 @@ export function Header() {
     <header className="container">
       <div className="bg-teal flex justify-between items-center my-6 p-4 rounded-2xl">
         {/* logo */}
-        <Link href={"/"}>
-          <Image src={"/images/template/logo.svg"} width={100} height={50} alt="لوگو" />
+        <Link href={'/'}>
+          <Image
+            src={'/images/template/logo.svg'}
+            width={100}
+            height={50}
+            alt="لوگو"
+          />
         </Link>
         {/* desktop nav */}
         <nav className="hidden lg:block">
@@ -51,11 +56,11 @@ export function Header() {
                 <Link
                   href={item.path}
                   className={cn(
-                    "flex flex-col text-sm gap-1.5 items-center text-white/60 relative transition-all",
+                    'flex flex-col text-sm gap-1.5 items-center text-white/60 relative transition-all',
                     {
-                      "text-white after:size-1.5 after:absolute after:bg-yellow after:rounded-full after:-bottom-2":
+                      'text-white after:size-1.5 after:absolute after:bg-yellow after:rounded-full after:-bottom-2':
                         pathname === item.path,
-                    }
+                    },
                   )}
                 >
                   {item.icon}

@@ -1,37 +1,37 @@
-import { cn } from "@/utils/cn";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { FaHeart, FaHome, FaShoppingCart } from "react-icons/fa";
-import { FaBagShopping } from "react-icons/fa6";
-import { PiShoppingBagOpenFill } from "react-icons/pi";
+import { cn } from '@/utils/cn';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { FaHeart, FaHome, FaShoppingCart } from 'react-icons/fa';
+import { FaBagShopping } from 'react-icons/fa6';
+import { PiShoppingBagOpenFill } from 'react-icons/pi';
 
 export function Footer() {
   const pathname = usePathname();
   const navItems = [
     {
-      text: "خانه",
+      text: 'خانه',
       icon: <FaHome size={22} />,
-      path: "/",
+      path: '/',
     },
     {
-      text: "محصولات",
+      text: 'محصولات',
       icon: <FaBagShopping size={22} />,
-      path: "/explore",
+      path: '/explore',
     },
     {
-      text: "سبد خرید",
+      text: 'سبد خرید',
       icon: <FaShoppingCart size={22} color="#fff" />,
-      path: "/cart",
+      path: '/cart',
     },
     {
-      text: "سفارشات",
+      text: 'سفارشات',
       icon: <PiShoppingBagOpenFill size={22} />,
-      path: "/orders",
+      path: '/orders',
     },
     {
-      text: "علاقه مندی",
+      text: 'علاقه مندی',
       icon: <FaHeart size={22} />,
-      path: "/favorites",
+      path: '/favorites',
     },
   ];
 
@@ -46,19 +46,19 @@ export function Footer() {
                 <Link
                   href={item.path}
                   className={cn(
-                    "flex flex-col text-[12px] gap-1 items-center text-gray-700/60 relative transition-all",
+                    'flex flex-col text-[12px] gap-1 items-center text-gray-700/60 relative transition-all',
                     {
-                      "text-gray-700 after:size-1.5 after:absolute after:bg-yellow after:rounded-full after:-bottom-2":
+                      'text-gray-700 after:size-1.5 after:absolute after:bg-yellow after:rounded-full after:-bottom-2':
                         pathname === item.path,
-                      "relative -top-9 bg-teal rounded-full size-14 flex justify-center items-center after:hidden":
-                        item.path === "/cart",
-                    }
+                      'relative -top-9 bg-teal rounded-full size-14 flex justify-center items-center after:hidden':
+                        item.path === '/cart',
+                    },
                   )}
                 >
                   {item.icon}
                   <p
-                    className={cn("font-bold", {
-                      'hidden': item.path === "/cart",
+                    className={cn('font-bold', {
+                      hidden: item.path === '/cart',
                     })}
                   >
                     {item.text}

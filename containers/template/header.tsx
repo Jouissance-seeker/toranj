@@ -1,11 +1,12 @@
 import { cn } from "@/utils/cn";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaHeart, FaHome, FaShoppingCart } from "react-icons/fa";
 import { FaBagShopping } from "react-icons/fa6";
 import { PiShoppingBagOpenFill } from "react-icons/pi";
 
-export function Footer() {
+export function Header() {
   const pathname = usePathname();
   const navItems = [
     {
@@ -19,11 +20,6 @@ export function Footer() {
       path: "/explore",
     },
     {
-      text: "سبد خرید",
-      icon: <FaShoppingCart size={22} color="#fff" />,
-      path: "/cart",
-    },
-    {
       text: "سفارشات",
       icon: <PiShoppingBagOpenFill size={22} />,
       path: "/orders",
@@ -33,42 +29,47 @@ export function Footer() {
       icon: <FaHeart size={22} />,
       path: "/favorites",
     },
+    {
+      text: "سبد خرید",
+      icon: <FaShoppingCart size={22} />,
+      path: "/cart",
+    },
   ];
 
   return (
-    <footer>
-      {/* mobile - bottom nav */}
-      <div className='bg-[url("/images/mobile-footer-bg.svg")] fixed bottom-0 bg-cover bg-center bg-no-repeat h-[72px w-full pb-2 pt-3 container lg:hidden'>
-        <nav>
-          <ul className="flex items-center justify-between gap-2 w-full">
+    <header className="container">
+      <div className="bg-teal flex justify-between items-center my-6 p-4 rounded-2xl">
+        {/* logo */}
+        <Link href={"/"}>
+          <Image src={"/images/template/logo.svg"} width={100} height={50} alt="لوگو" />
+        </Link>
+        {/* desktop nav */}
+        <nav className="hidden lg:block">
+          <ul className="flex items-center gap-5">
             {navItems.map((item) => (
-              <li key={item.text} className="w-[56px]">
+              <li key={item.text}>
                 <Link
                   href={item.path}
                   className={cn(
-                    "flex flex-col text-[12px] gap-1 items-center text-gray-700/60 relative transition-all",
+                    "flex flex-col text-sm gap-1.5 items-center text-white/60 relative transition-all",
                     {
-                      "text-gray-700 after:size-1.5 after:absolute after:bg-yellow after:rounded-full after:-bottom-2":
+                      "text-white after:size-1.5 after:absolute after:bg-yellow after:rounded-full after:-bottom-2":
                         pathname === item.path,
-                      "relative -top-9 bg-teal rounded-full size-14 flex justify-center items-center after:hidden":
-                        item.path === "/cart",
                     }
                   )}
                 >
                   {item.icon}
-                  <p
-                    className={cn("font-bold", {
-                      'hidden': item.path === "/cart",
-                    })}
-                  >
-                    {item.text}
-                  </p>
+                  <p className="font-bold">{item.text}</p>
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
+        {/* login / profile */}
+        <button className="text-teal bg-green font-medium px-4 py-2.5 rounded-lg">
+          ورود / ثبت نام
+        </button>
       </div>
-    </footer>
+    </header>
   );
 }

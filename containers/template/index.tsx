@@ -8,12 +8,12 @@ interface ITemplateProps {
   children: ReactNode;
 }
 
-export function TemplateBase(props: ITemplateProps) {
+export function Template(props: ITemplateProps) {
   return (
     <>
       <Header />
       <main className="flex flex-1 items-center justify-center">
-        {props.children}
+        <main className="size-full">{props.children}</main>
       </main>
       <Footer />
     </>

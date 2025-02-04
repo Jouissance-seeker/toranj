@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 import Providers from "./providers";
 import localFont from "next/font/local";
 import { cn } from "@/utils/cn";
-import { TemplateBase } from "@/containers/templates/base";
+import { Template } from "@/containers/template";
 
 export const metadata: Metadata = {
   title: "ترنج",
@@ -27,7 +27,7 @@ export default function RootLayout({
     >
       <body className={"flex flex-col h-dvh"}>
         <Providers>
-          <TemplateBase>{children}</TemplateBase>
+          <Template>{children}</Template>
         </Providers>
       </body>
     </html>

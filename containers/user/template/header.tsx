@@ -4,10 +4,12 @@ import { usePathname } from 'next/navigation';
 import { FaHeart, FaHome, FaShoppingCart } from 'react-icons/fa';
 import { IoFastFood } from 'react-icons/io5';
 import { PiShoppingBagOpenFill } from 'react-icons/pi';
+import { useToggleUrlState } from '@/hooks/toggle-url-state';
 import { cn } from '@/utils/cn';
 
 export function Header() {
   const pathname = usePathname();
+  const loginToggleUrlState = useToggleUrlState('login');
   const navItems = [
     {
       text: 'خانه',
@@ -17,7 +19,7 @@ export function Header() {
     {
       text: 'لقمه ها',
       icon: <IoFastFood size={22} />,
-      path: '/eatables',
+      path: '/explore',
     },
     {
       text: 'سفارشات',
@@ -41,12 +43,7 @@ export function Header() {
       <div className="my-6 flex items-center justify-between rounded-2xl bg-teal p-4">
         {/* logo */}
         <Link href="/">
-          <Image
-            src="/images/template/logo.svg"
-            width={100}
-            height={50}
-            alt="لوگو"
-          />
+          <Image src="/images/logo.svg" width={100} height={50} alt="لوگو" />
         </Link>
         {/* desktop nav */}
         <nav className="hidden lg:block">
@@ -71,7 +68,10 @@ export function Header() {
           </ul>
         </nav>
         {/* login / profile */}
-        <button className="rounded-lg bg-green px-4 py-2.5 font-medium text-teal">
+        <button
+          onClick={loginToggleUrlState.toggle}
+          className="rounded-lg bg-green px-4 py-2.5 font-medium text-teal"
+        >
           ورود / ثبت نام
         </button>
       </div>

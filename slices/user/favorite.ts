@@ -1,13 +1,14 @@
 import { slice } from 'killua';
-import { TProduct } from '@/types/product';
+import { TProduct } from '@/types/user/product';
 
-export const favoritesSlice = slice({
-  key: 'favorites',
+export const favoriteSlice = slice({
+  key: 'favorite',
   defaultClient: [] as TProduct[],
   defaultServer: [],
   selectors: {
     isInFavorites: (value, payload: number) =>
       value.some((product) => product.id === payload),
+    isEmpty: (value) => value.length === 0,
   },
   reducers: {
     add: (value, payload: TProduct) => {

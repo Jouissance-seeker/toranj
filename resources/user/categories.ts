@@ -1,4 +1,4 @@
-import { TProduct } from '@/types/product';
+import { TProduct } from '@/types/user/product';
 
 export const categoriesData: {
   id: number;

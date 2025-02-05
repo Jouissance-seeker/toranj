@@ -8,13 +8,13 @@ import { IoFastFood } from 'react-icons/io5';
 import { PiShoppingBagOpenFill } from 'react-icons/pi';
 import { cn } from '@/utils/cn';
 
-export function Footer() {
+export function MobileNavBottom() {
   const [currentPath, setCurrentPath] = useState('');
   const pathname = usePathname();
   useEffect(() => setCurrentPath(pathname), [pathname]);
   const navItems = [
     { text: 'خانه', icon: <FaHome size={22} />, path: '/' },
-    { text: 'خوراکی ها', icon: <IoFastFood size={22} />, path: '/eatables' },
+    { text: 'خوراکی ها', icon: <IoFastFood size={22} />, path: '/explore' },
     {
       text: 'سبد خرید',
       icon: <FaShoppingCart size={22} color="#fff" />,
@@ -29,8 +29,8 @@ export function Footer() {
   ];
 
   return (
-    <footer className="pt-28">
-      <div className="fixed bottom-0 z-50 h-[72px] w-full bg-[url('/images/template/mobile-footer-bg.svg')] bg-cover bg-center bg-no-repeat pb-2 pt-3 lg:hidden">
+    <section className="pt-28 lg:pt-10">
+      <div className="fixed bottom-0 z-50 h-[72px] w-full bg-[url('/images/mobile-footer-bg.svg')] bg-cover bg-center bg-no-repeat pb-2 pt-3 lg:hidden">
         <nav className="container">
           <ul className="flex w-full items-center justify-between gap-2">
             {navItems.map((item) => (
@@ -57,6 +57,6 @@ export function Footer() {
           </ul>
         </nav>
       </div>
-    </footer>
+    </section>
   );
 }

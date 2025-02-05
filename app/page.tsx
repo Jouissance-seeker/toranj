@@ -1,5 +1,5 @@
-import { Categories } from '@/containers/routes/home/categories';
-import { HeroSection } from '@/containers/routes/home/hero-section';
+import { Categories } from '@/containers/user/routes/home/categories';
+import { HeroSection } from '@/containers/user/routes/home/hero-section';
 
 export default function Page() {
   return (

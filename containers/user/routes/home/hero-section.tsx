@@ -13,22 +13,22 @@ export function HeroSection() {
         <div>
           <Image
             className="absolute bottom-0 left-0 h-auto w-full max-w-[600px] lg:left-3"
-            src="/images/routes/home/pizza.webp"
-            alt="Pizza"
+            src="/images/pizza.webp"
+            alt="پیتزا"
             width={600}
             height={400}
           />
           <Image
             className="absolute bottom-10 right-0 hidden md:block"
-            src="/images/routes/home/leaf.svg"
-            alt="Pizza"
+            src="/images/leaf.svg"
+            alt="برگ"
             width={75}
             height={75}
           />
           <Image
             className="absolute left-0 top-10 hidden md:block"
-            src="/images/routes/home/leaf.svg"
-            alt="Pizza"
+            src="/images/leaf.svg"
+            alt="برگ"
             width={75}
             height={75}
           />

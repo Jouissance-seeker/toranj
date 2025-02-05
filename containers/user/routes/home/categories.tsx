@@ -4,9 +4,9 @@ import 'swiper/css';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { ProductCard } from '@/components/product-card';
-import { SectionHead } from '@/components/section-head';
-import { categoriesData } from '@/resources/categories';
+import { ProductCard } from '@/components/user/product-card';
+import { SectionHead } from '@/components/user/section-head';
+import { categoriesData } from '@/resources/user/categories';
 import { cn } from '@/utils/cn';
 
 export function Categories() {
@@ -14,7 +14,7 @@ export function Categories() {
   const swiperRef = useRef<any>(null);
 
   return (
-    <div className="container flex flex-col gap-7">
+    <section className="container flex flex-col gap-7">
       <SectionHead title="دسته بندی ها" swiperRef={swiperRef} />
       <div className="flex flex-col gap-5">
         <Top
@@ -24,7 +24,7 @@ export function Categories() {
         />
         <Bottom activedIndex={activedIndex} />
       </div>
-    </div>
+    </section>
   );
 }
 

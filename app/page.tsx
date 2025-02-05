@@ -6,6 +6,8 @@ export default function Page() {
     <>
       <HeroSection />
       <Categories />
+      {/* <Discount />
+      <Offers /> */}
     </>
   );
 }

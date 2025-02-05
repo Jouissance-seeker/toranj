@@ -12,7 +12,7 @@ export function Template(props: ITemplateProps) {
   return (
     <>
       <Header />
-      <main className="flex flex-col gap-[60px]">{props.children}</main>
+      <main className="flex flex-col gap-14">{props.children}</main>
       <Footer />
     </>
   );

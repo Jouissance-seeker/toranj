@@ -14,6 +14,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      killua:
+        specifier: ^0.4.11
+        version: 0.4.11(@types/react@19.0.7)(react@19.0.0)
       next:
         specifier: 15.1.4
         version: 15.1.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -1470,6 +1473,12 @@ packages:
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
+
+  killua@0.4.11:
+    resolution: {integrity: sha512-K1y017uz9DLbKD5Fc9ZasODZtotIhFc7SnbfJFpN8sh1Hpo4nzA9Y19ZoFmS7BSVYfnUXlLt6Norq37IDkM2JA==}
+    peerDependencies:
+      '@types/react': '>=17.0.0'
+      react: '>=17.0.0'
 
   language-subtag-registry@0.3.23:
     resolution: {integrity: sha512-0K65Lea881pHotoGEa5gDlMxt3pctLi2RplBb7Ezh4rRdLEOtgi7n4EwK9lamnUCkKBqaeKRVebTq6BAxSkpXQ==}
@@ -3716,6 +3725,11 @@ snapshots:
   keyv@4.5.4:
     dependencies:
       json-buffer: 3.0.1
+
+  killua@0.4.11(@types/react@19.0.7)(react@19.0.0):
+    dependencies:
+      '@types/react': 19.0.7
+      react: 19.0.0
 
   language-subtag-registry@0.3.23: {}
 

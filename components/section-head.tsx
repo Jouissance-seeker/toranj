@@ -1,11 +1,11 @@
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 
-interface IHeadProps {
+interface ISectionHeadProps {
   swiperRef: any;
   title: string;
 }
 
-export function Head(props: IHeadProps) {
+export function SectionHead(props: ISectionHeadProps) {
   const handlePrev = () => {
     if (props.swiperRef.current && props.swiperRef.current.slidePrev) {
       props.swiperRef.current.slidePrev();

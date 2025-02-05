@@ -4,9 +4,9 @@ import 'swiper/css';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Card } from '@/components/routes/global/card';
-import { Head } from '@/components/routes/home/head';
-import { eatablesData } from '@/resources/eatables';
+import { ProductCard } from '@/components/product-card';
+import { SectionHead } from '@/components/section-head';
+import { categoriesData } from '@/resources/categories';
 import { cn } from '@/utils/cn';
 
 export function Categories() {
@@ -15,7 +15,7 @@ export function Categories() {
 
   return (
     <div className="container flex flex-col gap-7">
-      <Head title="دسته بندی ها" swiperRef={swiperRef} />
+      <SectionHead title="دسته بندی ها" swiperRef={swiperRef} />
       <div className="flex flex-col gap-5">
         <Top
           activedIndex={activedIndex}
@@ -43,7 +43,7 @@ const Top = (props: ITopProps) => {
         onSwiper={(swiper) => (props.swiperRef.current = swiper)}
         id="categories-slider"
       >
-        {eatablesData.map((item, index) => (
+        {categoriesData.map((item, index) => (
           <SwiperSlide key={item.id} className="!w-fit rounded-lg">
             <button
               onClick={() => props.setActivedIndex(index)}
@@ -82,9 +82,9 @@ interface IBottomProps {
 
 const Bottom = (props: IBottomProps) => {
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {eatablesData[props.activedIndex]?.children?.map((item) => (
-        <Card key={item.id} {...item} />
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {categoriesData[props.activedIndex]?.children?.map((item) => (
+        <ProductCard key={item.id} data={item} />
       ))}
     </div>
   );

@@ -1,4 +1,11 @@
-export const eatablesData = [
+import { TProduct } from '@/types/product';
+
+export const categoriesData: {
+  id: number;
+  image: string;
+  title: string;
+  children: TProduct[];
+}[] = [
   {
     id: 1,
     image:

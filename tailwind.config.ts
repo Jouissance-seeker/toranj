@@ -33,6 +33,10 @@ export default {
       transitionDuration: {
         DEFAULT: '300ms',
       },
+      fontSize: {
+        smp: '15px',
+        xsp: '13px',
+      },
     },
   },
   plugins: [scrollbarHide],

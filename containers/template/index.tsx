@@ -12,9 +12,7 @@ export function Template(props: ITemplateProps) {
   return (
     <>
       <Header />
-      <main className="flex flex-1 items-center justify-center">
-        <main className="size-full">{props.children}</main>
-      </main>
+      <main className="flex flex-col gap-[60px]">{props.children}</main>
       <Footer />
     </>
   );

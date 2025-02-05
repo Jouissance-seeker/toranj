@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export function HeroSection() {
   return (
-    <section className="container">
+    <section className="container size-full">
       <div
         style={{
           clipPath: 'ellipse(100% 100% at 50% 0%)',
@@ -39,7 +39,7 @@ export function HeroSection() {
           <p className="text-2xl font-bold text-white lg:text-3xl">
             تجربه غذایی لذیذ و به یادماندنی
           </p>
-          <p className="mr-2 mt-2 max-w-[450px] border-r border-r-slate-50/30 py-1 pr-2 text-sm text-slate-50/50">
+          <p className="mt-2 max-w-[450px] border-r border-r-slate-50/30 py-1 pr-2 text-sm text-slate-50/50">
             لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
             استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در
             ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و

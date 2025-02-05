@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaHeart, FaHome, FaShoppingCart } from 'react-icons/fa';
-import { FaBagShopping } from 'react-icons/fa6';
+import { IoFastFood } from 'react-icons/io5';
 import { PiShoppingBagOpenFill } from 'react-icons/pi';
 import { cn } from '@/utils/cn';
 
@@ -15,9 +15,9 @@ export function Header() {
       path: '/',
     },
     {
-      text: 'محصولات',
-      icon: <FaBagShopping size={22} />,
-      path: '/explore',
+      text: 'لقمه ها',
+      icon: <IoFastFood size={22} />,
+      path: '/eatables',
     },
     {
       text: 'سفارشات',

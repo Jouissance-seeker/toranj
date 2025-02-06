@@ -13,7 +13,7 @@ export function Categories() {
   const swiperRef = useRef<any>(null);
 
   return (
-    <section className="container flex flex-col gap-7">
+    <section className="container flex w-screen flex-col gap-7">
       <div className="flex flex-col gap-5">
         <Top
           activedIndex={activedIndex}

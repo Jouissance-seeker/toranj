@@ -7,11 +7,11 @@ import { ModalLogin } from './modal-login';
 import { ModalProduct } from './modal-product';
 import { ModalRegister } from './modal-register';
 
-interface ITemplateProps {
+interface IUserProps {
   children: ReactNode;
 }
 
-export function Template(props: ITemplateProps) {
+export function User(props: IUserProps) {
   return (
     <>
       <ModalLogin />

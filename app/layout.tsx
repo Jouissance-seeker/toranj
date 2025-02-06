@@ -2,7 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { ReactNode } from 'react';
-import { Template } from '@/containers/template';
+import { Template } from '@/containers/templates';
 import { cn } from '@/utils/cn';
 import Providers from './providers';
 

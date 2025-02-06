@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { FiPlus } from 'react-icons/fi';
 import { HiTrash } from 'react-icons/hi';
 import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io';
+import { IoEyeOutline } from 'react-icons/io5';
+import { useToggleUrlState } from '@/hooks/toggle-url-state';
 import { cartSlice } from '@/slices/user/cart';
 import { favoriteSlice } from '@/slices/user/favorite';
 import { TProduct } from '@/types/user/product';
@@ -17,11 +19,10 @@ interface IProductCardProps {
 export function ProductCard({ data }: IProductCardProps) {
   const localstorageFavorite = useKillua(favoriteSlice);
   const localstorageCart = useKillua(cartSlice);
-
   const isInCart = localstorageCart.selectors.isInCart(data);
   const quantityInCart = localstorageCart.selectors.quantity(data);
   const isInFavorites = localstorageFavorite.selectors.isInFavorites(data.id);
-
+  const productToggleUrlState = useToggleUrlState('product');
   const handleAddToCart = () => localstorageCart.reducers.add(data);
   const handleIncrementQuantity = () =>
     localstorageCart.reducers.increment(data);
@@ -46,11 +47,29 @@ export function ProductCard({ data }: IProductCardProps) {
         <Image src={data.image} alt={data.title} width={100} height={100} />
         <div className="flex flex-col gap-2">
           <p className="text-lg font-bold">{data.title}</p>
-          <p className="line-clamp-3 text-sm text-gray-500">
+          <p className="line-clamp-3 pl-4 text-sm text-gray-500">
             {data.description}
           </p>
         </div>
       </div>
+      {/* like */}
+      <button onClick={handleToggleFavorite}>
+        {isInFavorites ? (
+          <IoMdHeart size={24} className="absolute left-2 top-8 fill-red-500" />
+        ) : (
+          <IoMdHeartEmpty
+            size={24}
+            className="absolute left-2 top-8 fill-gray-400"
+          />
+        )}
+      </button>
+      {/* see */}
+      <button onClick={productToggleUrlState.show}>
+        <IoEyeOutline
+          size={24}
+          className="absolute left-2 top-2 stroke-gray-400"
+        />
+      </button>
       {/* add to cart / price */}
       <div className="mt-3 flex items-end justify-between border-t-2 border-dashed pt-3">
         {isInCart ? (
@@ -70,7 +89,7 @@ export function ProductCard({ data }: IProductCardProps) {
         ) : (
           <button
             onClick={handleAddToCart}
-            className="flex size-11 items-center justify-center rounded-lg border bg-gray p-3 text-gray-500 transition-all duration-300 hover:bg-teal hover:text-white"
+            className="flex size-10 items-center justify-center rounded-lg border bg-gray p-3 text-gray-500 transition-all duration-300 hover:bg-teal hover:text-white"
           >
             <FiPlus size={26} />
           </button>
@@ -93,17 +112,6 @@ export function ProductCard({ data }: IProductCardProps) {
           </p>
         </div>
       </div>
-      {/* like */}
-      <button onClick={handleToggleFavorite}>
-        {isInFavorites ? (
-          <IoMdHeart size={24} className="absolute left-3 top-3 fill-red-500" />
-        ) : (
-          <IoMdHeartEmpty
-            size={24}
-            className="absolute left-3 top-3 fill-gray-400"
-          />
-        )}
-      </button>
     </div>
   );
 }

@@ -38,7 +38,7 @@ export function ToggleSection(props: IToggleSectionProps) {
         })}
       >
         <div className="container">
-          <div className="rounded-md border border-gray-200">
+          <div className="rounded-md border border-gray-200 bg-white">
             {/* head */}
             <div className="absolute -top-11 right-2 flex p-2">
               <button

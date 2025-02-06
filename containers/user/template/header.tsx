@@ -69,7 +69,7 @@ export function Header() {
         </nav>
         {/* login / profile */}
         <button
-          onClick={loginToggleUrlState.toggle}
+          onClick={loginToggleUrlState.show}
           className="rounded-lg bg-green px-4 py-2.5 font-medium text-teal"
         >
           ورود / ثبت نام

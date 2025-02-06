@@ -51,7 +51,7 @@ export function ModalLogin() {
       isShow={loginToggleUrlState.isShow}
       isBackDrop
       onClose={loginToggleUrlState.hide}
-      className="fixed left-1/2 top-1/2 w-[350px] -translate-x-1/2 -translate-y-1/2 sm:w-[450px]"
+      className="fixed left-1/2 top-1/2 w-[350px] -translate-x-1/2 -translate-y-1/2 sm:w-[500px]"
     >
       <div className="flex flex-col rounded-lg bg-white">
         {/* head */}
@@ -112,7 +112,6 @@ export function ModalLogin() {
               </p>
             </div>
           </div>
-
           {/* submit */}
           <button
             type="submit"

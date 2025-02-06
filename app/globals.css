@@ -14,10 +14,6 @@ body {
   @apply bg-gray text-[#4C4C4C];
 }
 
-input {
-  @apply outline-0;
-}
-
 .show {
   @apply opacity-100 visible;
 }
@@ -31,8 +27,11 @@ form {
     label {
       @apply text-smp text-teal;
     }
-    input {
-      @apply w-full rounded-lg text-smp border bg-gray-100 p-2.5 transition-all focus:border-teal/50;
+    input, textarea {
+      @apply w-full outline-none rounded-lg text-smp border bg-gray p-2.5 transition-all focus:border-teal/50;
+    }
+    textarea {
+      @apply max-h-24 min-h-24;
     }
     p {
       @apply p-1 text-xsp text-red-500;

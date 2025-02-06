@@ -33,15 +33,15 @@ export function ToggleSection(props: IToggleSectionProps) {
         <div className="container">
           <div className="rounded-md border border-gray-200 bg-white">
             {/* head */}
-            <div className="absolute -top-11 right-2 flex p-2">
+            <div className="absolute -top-10 right-2.5 flex p-1">
               <button
                 onClick={() => {
                   console.log('Close button clicked');
                   props.onClose();
                 }}
-                className="flex size-8 items-center justify-center overflow-hidden rounded-md bg-red-500"
+                className="flex size-8 items-center justify-center overflow-hidden rounded-lg bg-red-500"
               >
-                <HiMiniXMark size={20} className="fill-white" />
+                <HiMiniXMark size={24} className="fill-white" />
               </button>
             </div>
             {/* body */}

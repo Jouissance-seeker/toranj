@@ -58,6 +58,7 @@ export function ModalProduct() {
       <div className="relative flex flex-col items-center gap-3 p-3">
         {productToggleUrlState.isShow ? (
           <>
+            {/* image */}
             <Image
               src={data.image}
               alt={data.title}
@@ -65,17 +66,20 @@ export function ModalProduct() {
               height={130}
               className="sm:size-[150px]"
             />
+            {/* like */}
             <button
               onClick={handleToggleFavorite}
               className="absolute left-3 top-3"
             >
               {localstorageFavorite.selectors.isInFavorites(data.id) ? (
-                <IoMdHeart size={22} className="fill-red-500" />
+                <IoMdHeart size={25} className="fill-red-500" />
               ) : (
-                <IoMdHeartEmpty size={22} className="fill-gray-400" />
+                <IoMdHeartEmpty size={25} className="fill-gray-400" />
               )}
             </button>
+            {/* title */}
             <p className="font-bold sm:text-lg">{data.title}</p>
+            {/* description */}
             <p className="text-center text-sm text-gray-500 sm:text-smp">
               {data.description}
             </p>

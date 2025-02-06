@@ -1,7 +1,9 @@
+'use client';
+
 import {
   ArchiveList,
   FilterCategories,
-} from '@/containers/routes/explore/archive-list';
+} from '@/containers/routes/explore/explore-list';
 
 export default function Page() {
   return (

@@ -3,7 +3,6 @@
 import 'swiper/css';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
-import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { ProductCard } from '@/components/product-card';
 import { categoriesData } from '@/resources/categories';
@@ -15,7 +14,6 @@ export function Categories() {
 
   return (
     <section className="container flex flex-col gap-7">
-      <SectionHead title="دسته بندی ها" swiperRef={swiperRef} />
       <div className="flex flex-col gap-5">
         <Top
           activedIndex={activedIndex}
@@ -93,42 +91,3 @@ const Bottom = (props: IBottomProps) => {
     </div>
   );
 };
-
-interface ISectionHeadProps {
-  swiperRef: any;
-  title: string;
-}
-
-export function SectionHead(props: ISectionHeadProps) {
-  const handlePrev = () => {
-    if (props.swiperRef.current && props.swiperRef.current.slidePrev) {
-      props.swiperRef.current.slidePrev();
-    }
-  };
-  const handleNext = () => {
-    if (props.swiperRef.current && props.swiperRef.current.slideNext) {
-      props.swiperRef.current.slideNext();
-    }
-  };
-
-  return (
-    <div className="flex items-center gap-3">
-      <h2 className="text-lg font-bold text-gray-600">{props.title}</h2>
-      <span className="h-px grow bg-gray-200" />
-      <div className="mb-[-30px] flex size-fit gap-2 transition-all">
-        <button
-          className="z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-lg border bg-white"
-          onClick={handlePrev}
-        >
-          <HiChevronRight className="size-4 fill-gray-600" />
-        </button>
-        <button
-          className="z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-lg border bg-white"
-          onClick={handleNext}
-        >
-          <HiChevronLeft className="size-4 fill-gray-600" />
-        </button>
-      </div>
-    </div>
-  );
-}

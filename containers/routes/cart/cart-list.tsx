@@ -2,10 +2,10 @@
 
 import { useKillua } from 'killua';
 import Link from 'next/link';
-import { Empty } from '@/components/user/empty';
-import { Loader } from '@/components/user/loader';
-import { ProductCard } from '@/components/user/product-card';
-import { cartSlice } from '@/slices/user/cart';
+import { Empty } from '@/components/empty';
+import { Loader } from '@/components/loader';
+import { ProductCard } from '@/components/product-card';
+import { cartSlice } from '@/slices/cart';
 
 export function CartList() {
   const localstorageCart = useKillua(cartSlice);

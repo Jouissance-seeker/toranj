@@ -1,5 +1,5 @@
-import { ProductCard } from '@/components/user/product-card';
-import { categoriesData } from '@/resources/user/categories';
+import { ProductCard } from '@/components/product-card';
+import { categoriesData } from '@/resources/categories';
 
 export default function Page() {
   return (

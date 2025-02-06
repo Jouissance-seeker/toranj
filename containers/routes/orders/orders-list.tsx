@@ -1,4 +1,4 @@
-import { Empty } from '@/components/user/empty';
+import { Empty } from '@/components/empty';
 
 export function OrdersList() {
   return (

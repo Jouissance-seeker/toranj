@@ -2,8 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+input {
+  outline: none;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
 body {
   @apply bg-gray text-[#4C4C4C];
+}
+
+input {
+  @apply outline-0;
 }
 
 .show {
@@ -11,4 +23,19 @@ body {
 }
 .hide {
   @apply opacity-0 invisible;
+}
+
+form {
+  div > div {
+    @apply col-span-1 flex flex-col gap-1;
+    label {
+      @apply text-smp text-teal;
+    }
+    input {
+      @apply w-full rounded-lg border bg-gray-100 p-2 transition-all focus:border-teal/50;
+    }
+    p {
+      @apply p-1 text-xsp text-red-500;
+    }
+  }    
 }

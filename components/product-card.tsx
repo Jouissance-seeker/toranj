@@ -7,9 +7,9 @@ import { HiTrash } from 'react-icons/hi';
 import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io';
 import { IoEyeOutline } from 'react-icons/io5';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
-import { cartSlice } from '@/slices/user/cart';
-import { favoriteSlice } from '@/slices/user/favorite';
-import { TProduct } from '@/types/user/product';
+import { cartSlice } from '@/slices/cart';
+import { favoriteSlice } from '@/slices/favorite';
+import { TProduct } from '@/types/product';
 import { cn } from '@/utils/cn';
 
 interface IProductCardProps {

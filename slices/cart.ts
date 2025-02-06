@@ -1,5 +1,5 @@
 import { slice } from 'killua';
-import { TProduct } from '@/types/user/product';
+import { TProduct } from '@/types/product';
 
 export const cartSlice = slice({
   key: 'cart',

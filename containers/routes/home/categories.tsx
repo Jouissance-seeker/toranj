@@ -4,9 +4,9 @@ import 'swiper/css';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { ProductCard } from '@/components/user/product-card';
-import { SectionHead } from '@/components/user/section-head';
-import { categoriesData } from '@/resources/user/categories';
+import { ProductCard } from '@/components/product-card';
+import { SectionHead } from '@/components/section-head';
+import { categoriesData } from '@/resources/categories';
 import { cn } from '@/utils/cn';
 
 export function Categories() {

@@ -1,10 +1,10 @@
 'use client';
 
 import { useKillua } from 'killua';
-import { Empty } from '@/components/user/empty';
-import { Loader } from '@/components/user/loader';
-import { ProductCard } from '@/components/user/product-card';
-import { favoriteSlice } from '@/slices/user/favorite';
+import { Empty } from '@/components/empty';
+import { Loader } from '@/components/loader';
+import { ProductCard } from '@/components/product-card';
+import { favoriteSlice } from '@/slices/favorite';
 
 export function FavoriteList() {
   const localstorageFavorite = useKillua(favoriteSlice);

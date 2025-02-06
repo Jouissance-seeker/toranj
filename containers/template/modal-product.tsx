@@ -3,11 +3,11 @@ import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { HiTrash } from 'react-icons/hi2';
 import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io';
-import { Loader } from '@/components/user/loader';
-import { ToggleSection } from '@/components/user/toggle-section';
+import { Loader } from '@/components/loader';
+import { ToggleSection } from '@/components/toggle-section';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
-import { cartSlice } from '@/slices/user/cart';
-import { favoriteSlice } from '@/slices/user/favorite';
+import { cartSlice } from '@/slices/cart';
+import { favoriteSlice } from '@/slices/favorite';
 import { cn } from '@/utils/cn';
 
 export function ModalProduct() {

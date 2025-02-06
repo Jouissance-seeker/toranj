@@ -80,6 +80,9 @@ export function ModalLogin() {
                 id="phone"
                 {...form.register('phoneNumber')}
                 type="number"
+                className={cn({
+                  'border-red-500': form.formState.errors.phoneNumber,
+                })}
               />
               <p
                 className={cn({
@@ -96,6 +99,9 @@ export function ModalLogin() {
                 {...form.register('password')}
                 id="password"
                 type="password"
+                className={cn({
+                  'border-red-500': form.formState.errors.password,
+                })}
               />
               <p
                 className={cn({

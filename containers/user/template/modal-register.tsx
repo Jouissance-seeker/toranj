@@ -4,6 +4,10 @@ import { useToggleUrlState } from '@/hooks/toggle-url-state';
 export function ModalRegister() {
   const loginToggleUrlState = useToggleUrlState('login');
   const registerToggleUrlState = useToggleUrlState('register');
+  const handleShowModalLogin = () => {
+    registerToggleUrlState.hide();
+    loginToggleUrlState.show();
+  };
 
   return (
     <ToggleSection
@@ -15,10 +19,7 @@ export function ModalRegister() {
       <div className="flex justify-between rounded-lg bg-teal p-1">
         <div className="flex w-full justify-between">
           <button
-            onClick={() => {
-              registerToggleUrlState.hide();
-              loginToggleUrlState.show();
-            }}
+            onClick={handleShowModalLogin}
             className="w-1/2 px-6 py-3 text-center text-white"
           >
             ورود

@@ -1,8 +1,8 @@
 'use client';
 
 import { useKillua } from 'killua';
-import Image from 'next/image';
 import Link from 'next/link';
+import { Empty } from '@/components/user/empty';
 import { Loader } from '@/components/user/loader';
 import { ProductCard } from '@/components/user/product-card';
 import { cartSlice } from '@/slices/user/cart';
@@ -14,7 +14,7 @@ export function CartList() {
     <section className="container h-full">
       {localstorageCart.isReady ? (
         localstorageCart.selectors.isEmpty() ? (
-          <Empty />
+          <Empty text="محصولی را به سبد خرید اضافه نکرده اید!" />
         ) : (
           <div className="grid gap-3 md:grid-cols-[1fr_300px]">
             <List />
@@ -27,15 +27,6 @@ export function CartList() {
     </section>
   );
 }
-
-const Empty = () => {
-  return (
-    <div className="flex h-full flex-col items-center justify-center gap-3">
-      <Image src="/images/waiter.svg" width={350} height={350} alt="گارسون" />
-      <p className="lg:text-lg">محصولی را به سبد خرید اضافه نکرده اید!</p>
-    </div>
-  );
-};
 
 const List = () => {
   const localstorageCart = useKillua(cartSlice);
@@ -53,7 +44,7 @@ const GoToCheckout = () => {
   const localstorageCart = useKillua(cartSlice);
 
   return (
-    <div className="flex h-fit w-full flex-1 flex-col rounded-xl border bg-white p-4">
+    <div className="sticky top-3 flex h-fit w-full flex-1 flex-col rounded-xl border bg-white p-4">
       {/* total price */}
       <div className="flex w-full items-center justify-between text-black">
         <p className="text-center">مجموع :</p>

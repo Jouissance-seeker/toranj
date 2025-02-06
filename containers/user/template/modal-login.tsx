@@ -4,6 +4,10 @@ import { useToggleUrlState } from '@/hooks/toggle-url-state';
 export function ModalLogin() {
   const loginToggleUrlState = useToggleUrlState('login');
   const registerToggleUrlState = useToggleUrlState('register');
+  const handleShowModalRegister = () => {
+    loginToggleUrlState.hide();
+    registerToggleUrlState.show();
+  };
 
   return (
     <ToggleSection
@@ -18,10 +22,7 @@ export function ModalLogin() {
             ورود
           </p>
           <button
-            onClick={() => {
-              loginToggleUrlState.hide();
-              registerToggleUrlState.show();
-            }}
+            onClick={handleShowModalRegister}
             className="w-1/2 px-6 py-3 text-center text-white"
           >
             ثبت نام

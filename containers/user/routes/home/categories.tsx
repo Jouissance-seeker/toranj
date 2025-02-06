@@ -35,6 +35,10 @@ interface ITopProps {
 }
 
 const Top = (props: ITopProps) => {
+  const handleActiveCategory = (value: number) => {
+    props.setActivedIndex(value);
+  };
+
   return (
     <div className="flex justify-center">
       <Swiper
@@ -46,7 +50,7 @@ const Top = (props: ITopProps) => {
         {categoriesData.map((item, index) => (
           <SwiperSlide key={item.id} className="!w-fit rounded-lg">
             <button
-              onClick={() => props.setActivedIndex(index)}
+              onClick={() => handleActiveCategory(index)}
               className={cn(
                 'rounded-xl border transition-all w-[100px] overflow-hidden bg-white p-1.5',
                 {

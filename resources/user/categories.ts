@@ -22,7 +22,6 @@ export const categoriesData: {
         discount: 8,
         priceWithoutDiscount: 180000,
         priceWithDiscount: 165000,
-        timeRequired: 15,
       },
       {
         id: 2,
@@ -34,7 +33,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 180000,
         priceWithDiscount: 180000,
-        timeRequired: 15,
       },
       {
         id: 3,
@@ -46,7 +44,6 @@ export const categoriesData: {
         discount: 8,
         priceWithoutDiscount: 180000,
         priceWithDiscount: 165000,
-        timeRequired: 15,
       },
       {
         id: 4,
@@ -58,7 +55,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 180000,
         priceWithDiscount: 180000,
-        timeRequired: 15,
       },
       {
         id: 5,
@@ -70,7 +66,6 @@ export const categoriesData: {
         discount: 8,
         priceWithoutDiscount: 180000,
         priceWithDiscount: 165000,
-        timeRequired: 15,
       },
       {
         id: 6,
@@ -82,7 +77,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 180000,
         priceWithDiscount: 180000,
-        timeRequired: 15,
       },
     ],
   },
@@ -102,7 +96,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 29000,
         priceWithDiscount: 29000,
-        timeRequired: 5,
       },
       {
         id: 4,
@@ -114,7 +107,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 10000,
         priceWithDiscount: 10000,
-        timeRequired: 5,
       },
     ],
   },
@@ -134,7 +126,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 29000,
         priceWithDiscount: 29000,
-        timeRequired: 5,
       },
       {
         id: 6,
@@ -146,7 +137,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 10000,
         priceWithDiscount: 10000,
-        timeRequired: 5,
       },
     ],
   },
@@ -166,7 +156,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 29000,
         priceWithDiscount: 29000,
-        timeRequired: 5,
       },
       {
         id: 8,
@@ -178,7 +167,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 10000,
         priceWithDiscount: 10000,
-        timeRequired: 5,
       },
     ],
   },
@@ -198,7 +186,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 29000,
         priceWithDiscount: 29000,
-        timeRequired: 5,
       },
       {
         id: 10,
@@ -210,7 +197,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 10000,
         priceWithDiscount: 10000,
-        timeRequired: 5,
       },
     ],
   },
@@ -230,7 +216,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 29000,
         priceWithDiscount: 29000,
-        timeRequired: 5,
       },
       {
         id: 12,
@@ -242,7 +227,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 10000,
         priceWithDiscount: 10000,
-        timeRequired: 5,
       },
     ],
   },
@@ -262,7 +246,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 29000,
         priceWithDiscount: 29000,
-        timeRequired: 5,
       },
       {
         id: 14,
@@ -274,7 +257,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 10000,
         priceWithDiscount: 10000,
-        timeRequired: 5,
       },
     ],
   },
@@ -294,7 +276,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 29000,
         priceWithDiscount: 29000,
-        timeRequired: 5,
       },
       {
         id: 16,
@@ -306,7 +287,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 10000,
         priceWithDiscount: 10000,
-        timeRequired: 5,
       },
     ],
   },
@@ -326,7 +306,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 29000,
         priceWithDiscount: 29000,
-        timeRequired: 5,
       },
       {
         id: 18,
@@ -338,7 +317,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 10000,
         priceWithDiscount: 10000,
-        timeRequired: 5,
       },
     ],
   },
@@ -358,7 +336,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 29000,
         priceWithDiscount: 29000,
-        timeRequired: 5,
       },
       {
         id: 20,
@@ -370,7 +347,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 10000,
         priceWithDiscount: 10000,
-        timeRequired: 5,
       },
     ],
   },
@@ -390,7 +366,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 29000,
         priceWithDiscount: 29000,
-        timeRequired: 5,
       },
       {
         id: 22,
@@ -402,7 +377,6 @@ export const categoriesData: {
         discount: 0,
         priceWithoutDiscount: 10000,
         priceWithDiscount: 10000,
-        timeRequired: 5,
       },
     ],
   },

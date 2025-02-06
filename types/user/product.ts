@@ -6,5 +6,4 @@ export type TProduct = {
   discount: number;
   priceWithoutDiscount: number;
   priceWithDiscount: number;
-  timeRequired: number;
 };

@@ -30,7 +30,7 @@ export function MobileNavBottom() {
 
   return (
     <section className="pt-28 lg:pt-10">
-      <div className="fixed bottom-0 z-50 h-[72px] w-full bg-[url('/images/mobile-footer-bg.svg')] bg-cover bg-center bg-no-repeat pb-2 pt-3 lg:hidden">
+      <div className="fixed bottom-0 z-30 h-[72px] w-full bg-[url('/images/mobile-footer-bg.svg')] bg-cover bg-center bg-no-repeat pb-2 pt-3 lg:hidden">
         <nav className="container">
           <ul className="flex w-full items-center justify-between gap-2">
             {navItems.map((item) => (

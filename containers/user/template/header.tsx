@@ -10,6 +10,9 @@ import { cn } from '@/utils/cn';
 export function Header() {
   const pathname = usePathname();
   const loginToggleUrlState = useToggleUrlState('login');
+  const handleShowModalLogin = () => {
+    loginToggleUrlState.show();
+  };
   const navItems = [
     {
       text: 'خانه',
@@ -69,7 +72,7 @@ export function Header() {
         </nav>
         {/* login / profile */}
         <button
-          onClick={loginToggleUrlState.show}
+          onClick={handleShowModalLogin}
           className="rounded-lg bg-green px-4 py-2.5 font-medium text-teal"
         >
           ورود / ثبت نام

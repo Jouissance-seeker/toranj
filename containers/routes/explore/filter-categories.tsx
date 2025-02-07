@@ -52,6 +52,7 @@ const CheckboxItem = (props: ICheckboxItemProps) => {
         : [...currentValues, props.data.id];
       return {
         ...prev,
+        'filter-discount': undefined,
         [queryKey]: updatedValues.length ? updatedValues.join(',') : undefined,
       };
     });

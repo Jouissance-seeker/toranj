@@ -10,6 +10,7 @@ export function FilterDiscount() {
   const handleToggle = () => {
     updateQuery((prev) => ({
       ...prev,
+      'filter-categories': undefined,
       [queryKey]: isChecked ? undefined : String(true),
     }));
     setIsChecked((prev) => !prev);

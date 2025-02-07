@@ -1,6 +1,7 @@
 'use client';
 
 import { ReactNode } from 'react';
+import { Header } from './header';
 
 interface IDashboardProps {
   children: ReactNode;
@@ -8,8 +9,9 @@ interface IDashboardProps {
 
 export function Dashboard(props: IDashboardProps) {
   return (
-    <main className="flex flex-1 flex-col items-center justify-center gap-14">
-      {props.children}
-    </main>
+    <div className="flex h-full flex-col lg:flex-row-reverse">
+      <Header />
+      <main className="container my-6 flex w-full">{props.children}</main>
+    </div>
   );
 }

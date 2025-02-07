@@ -11,7 +11,7 @@ interface IUserProps {
   children: ReactNode;
 }
 
-export function User(props: IUserProps) {
+export function Base(props: IUserProps) {
   return (
     <>
       <ModalLogin />

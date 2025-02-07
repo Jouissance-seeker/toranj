@@ -2,8 +2,8 @@
 
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
+import { Base } from './base';
 import { Dashboard } from './dashboard';
-import { User } from './user';
 
 interface ITemplateProps {
   children: ReactNode;
@@ -16,6 +16,6 @@ export function Template(props: ITemplateProps) {
   return isRouteDashboard ? (
     <Dashboard>{props.children}</Dashboard>
   ) : (
-    <User>{props.children}</User>
+    <Base>{props.children}</Base>
   );
 }

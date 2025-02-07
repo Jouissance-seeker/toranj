@@ -11,6 +11,7 @@ import { cartSlice } from '@/slices/cart';
 import { favoriteSlice } from '@/slices/favorite';
 import { TProduct } from '@/types/product';
 import { cn } from '@/utils/cn';
+import { formatPrice } from '@/utils/format-price';
 
 interface IProductCardProps {
   data: TProduct;
@@ -107,14 +108,14 @@ export function ProductCard({ data }: IProductCardProps) {
             })}
           >
             <p className="text-sm text-gray-500 line-through">
-              {data.priceWithoutDiscount.toLocaleString('fa-IR')} تومان
+              {formatPrice(data.priceWithoutDiscount)}
             </p>
             <p className="rounded-md bg-yellow px-2 py-0.5 text-sm text-white">
               %{data.discount}
             </p>
           </div>
-          <p className="text-center text-lg font-bold">
-            {data.priceWithDiscount.toLocaleString('fa-IR')} تومان
+          <p className="text-center font-bold">
+            {formatPrice(data.priceWithDiscount)}
           </p>
         </div>
       </div>

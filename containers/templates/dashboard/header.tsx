@@ -52,7 +52,7 @@ const Desktop = (props: IDesktopProps) => {
   const pathname = usePathname();
 
   return (
-    <div className="relative hidden size-full border bg-teal p-4 text-white sm:w-48 lg:block">
+    <div className="relative hidden size-full w-56 border bg-teal p-4 text-white lg:block">
       {/* logo */}
       <div className="flex justify-center pb-5 pt-2">
         <Link href="/">
@@ -104,7 +104,7 @@ const Mobile = (props: IMobileProps) => {
   const pathname = usePathname();
 
   return (
-    <div className="relative flex size-full justify-center border bg-teal p-4 text-white lg:hidden">
+    <div className="relative flex size-full justify-center border bg-teal py-4 text-white lg:hidden">
       <nav className="w-full max-w-[350px]">
         <ul className="flex justify-between gap-2">
           {props.navItems.map((item) => (

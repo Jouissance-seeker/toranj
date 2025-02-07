@@ -9,6 +9,7 @@ import { useToggleUrlState } from '@/hooks/toggle-url-state';
 import { cartSlice } from '@/slices/cart';
 import { favoriteSlice } from '@/slices/favorite';
 import { cn } from '@/utils/cn';
+import { formatPrice } from '@/utils/format-price';
 
 export function ModalProduct() {
   const searchParams = useSearchParams();
@@ -121,13 +122,13 @@ export function ModalProduct() {
                   })}
                 >
                   <p className="text-sm text-gray-500 line-through">
-                    {data.priceWithoutDiscount.toLocaleString('fa-IR')} تومان
+                    {formatPrice(data.priceWithoutDiscount)}
                   </p>
                   <p className="rounded-md bg-yellow px-2 py-0.5 text-sm text-white">
                     %{data.discount}
                   </p>
                 </div>
-                <p>{data.priceWithDiscount.toLocaleString('fa-IR')} تومان</p>
+                <p>{formatPrice(data.priceWithDiscount)}</p>
               </div>
             </div>
           </>

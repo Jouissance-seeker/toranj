@@ -91,7 +91,7 @@ export function ModalRegister() {
         {/* body */}
         <form
           onSubmit={form.handleSubmit(handleSubmitForm)}
-          className="flex w-full flex-col p-2"
+          className="flex w-full flex-col p-3"
         >
           {/* fields */}
           <div className="mb-4 mt-2 grid grid-cols-2 gap-2">

@@ -2,7 +2,9 @@
 
 import { AppProgressBar } from 'next-nprogress-bar';
 import type { ReactNode } from 'react';
+import { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
+import { Loader } from '@/components/loader';
 
 interface IProps {
   children: ReactNode;
@@ -28,7 +30,7 @@ export default function Providers({ children }: IProps) {
     <>
       <Toast />
       <ProgressBar />
-      {children}
+      <Suspense fallback={<Loader />}>{children}</Suspense>
     </>
   );
 }

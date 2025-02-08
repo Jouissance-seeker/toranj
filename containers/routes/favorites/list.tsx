@@ -8,10 +8,10 @@ export function List() {
   const localstorageFavorite = useKillua(favoriteSlice);
 
   return (
-    <div className="grid h-fit grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <section className="grid h-fit grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {localstorageFavorite.get().map((item) => (
         <ProductCard key={item.id} data={item} />
       ))}
-    </div>
+    </section>
   );
 }

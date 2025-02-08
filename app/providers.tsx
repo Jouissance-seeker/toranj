@@ -2,7 +2,7 @@
 
 import { AppProgressBar } from 'next-nprogress-bar';
 import type { ReactNode } from 'react';
-import { Suspense } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 interface IProps {
   children: ReactNode;
@@ -19,11 +19,16 @@ const ProgressBar = () => {
   );
 };
 
+const Toast = () => {
+  return <Toaster />;
+};
+
 export default function Providers({ children }: IProps) {
   return (
     <>
+      <Toast />
       <ProgressBar />
-      <Suspense>{children}</Suspense>
+      {children}
     </>
   );
 }

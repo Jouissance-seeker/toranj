@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 
 export const baseURL = 'https://api.brity.ir/api';
 
@@ -9,17 +9,6 @@ export const api = axios.create({
     'Content-Type': 'application/json',
   },
 });
-
-api.interceptors.request.use(
-  (config) => {
-    // const accessToken = cookie.get('access_token');
-    // if (accessToken) {
-    //   config.headers.Authorization = `Bearer ${accessToken}`;
-    // }
-    return config;
-  },
-  (error) => Promise.reject(error),
-);
 
 api.interceptors.response.use(
   (response) => response,

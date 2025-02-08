@@ -52,5 +52,6 @@ export const cartSlice = slice({
           : product,
       );
     },
+    reset: () => [],
   },
 });

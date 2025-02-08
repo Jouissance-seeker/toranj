@@ -11,7 +11,7 @@ export function Stepper(props: IStepperProps) {
   const currentStepIndex = steps.indexOf(props.step);
 
   return (
-    <div className="col-span-full flex items-center justify-between gap-2 whitespace-nowrap text-smp">
+    <section className="col-span-full flex items-center justify-between gap-2 whitespace-nowrap text-smp">
       <div className="flex flex-col items-center gap-1">
         <div
           className={cn(
@@ -53,6 +53,6 @@ export function Stepper(props: IStepperProps) {
         </div>
         <p className="pt-0.5">پرداخت</p>
       </div>
-    </div>
+    </section>
   );
 }

@@ -60,7 +60,7 @@ const CheckboxItem = (props: ICheckboxItemProps) => {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <section className="flex items-center gap-2">
       <button
         onClick={handleCheck}
         className={cn(
@@ -71,6 +71,6 @@ const CheckboxItem = (props: ICheckboxItemProps) => {
         {isChecked ? <HiCheck className="fill-white p-0.5" /> : null}
       </button>
       <p className="text-sm text-gray-600">{props.data.title}</p>
-    </div>
+    </section>
   );
 };

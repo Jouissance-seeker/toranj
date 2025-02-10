@@ -333,12 +333,6 @@ export default [
       '@next/next/no-title-in-document-head': 'warn',
       '@next/next/no-unwanted-polyfillio': 'warn',
       'no-undef': 'off',
-      'max-lines-per-function': [
-        'warn',
-        {
-          max: 250,
-        },
-      ],
     },
     ignores: ['.next'],
   },

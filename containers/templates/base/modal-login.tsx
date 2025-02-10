@@ -1,10 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { z } from 'zod';
 import { ToggleSection } from '@/components/toggle-section';
-import { useApiCall } from '@/hooks/api-call';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
-import { APIlogin } from '@/services/login';
 import { cn } from '@/utils/cn';
 
 export function ModalLogin() {
@@ -14,15 +13,33 @@ export function ModalLogin() {
     loginToggleUrlState.hide();
     registerToggleUrlState.show();
   };
+  const handleCloseModalLogin = () => {
+    loginToggleUrlState.hide();
+  };
 
   // form
-  const [callApiSubmitBtn, isLoadingSubmitBtn] = useApiCall();
+  const formFields = {
+    phoneNumber: {
+      type: 'number',
+      label: 'شماره موبایل',
+      errors: {
+        isNotCorrect: 'شماره موبایل وارد شده معتبر نیست!',
+      },
+    },
+    password: {
+      type: 'password',
+      label: 'رمز عبور',
+      errors: {
+        least8characters: 'رمز عبور باید حداقل 8 کاراکتر باشد!',
+      },
+    },
+  };
   const formSchema = z.object({
     phoneNumber: z.string().regex(new RegExp(/^0\d{10}$/), {
-      message: 'شماره موبایل وارد شده معتبر نیست!',
+      message: formFields.phoneNumber.errors.isNotCorrect,
     }),
     password: z.string().min(8, {
-      message: 'رمز عبور باید حداقل 8 کاراکتر باشد!',
+      message: formFields.password.errors.least8characters,
     }),
   });
   const form = useForm<z.infer<typeof formSchema>>({
@@ -32,25 +49,15 @@ export function ModalLogin() {
       password: '',
     },
   });
-  const handleSubmitForm = async (values: any) => {
-    callApiSubmitBtn(
-      APIlogin({
-        body: {
-          phone: values.phoneNumber,
-          password: values.password,
-        },
-      }),
-      () => {
-        // ...
-      },
-    );
+  const handleSubmitForm = async () => {
+    toast.success('ورود با موفقیت انجام شد!');
   };
 
   return (
     <ToggleSection
       isShow={loginToggleUrlState.isShow}
       isBackDrop
-      onClose={loginToggleUrlState.hide}
+      onClose={handleCloseModalLogin}
       className="fixed left-1/2 top-1/2 w-[350px] -translate-x-1/2 -translate-y-1/2 sm:w-[500px]"
     >
       <div className="flex flex-col rounded-lg bg-white">
@@ -73,49 +80,32 @@ export function ModalLogin() {
         >
           {/* fields */}
           <div className="mb-4 mt-2 grid gap-2">
-            {/* phone */}
-            <div>
-              <label htmlFor="phone">تلفن همراه</label>
-              <input
-                id="phone"
-                {...form.register('phoneNumber')}
-                type="number"
-                className={cn({
-                  'border-red-500': form.formState.errors.phoneNumber,
-                })}
-              />
-              <p
-                className={cn({
-                  hidden: !form.formState.errors.phoneNumber?.message,
-                })}
-              >
-                {form.formState.errors.phoneNumber?.message}
-              </p>
-            </div>
-            {/* password */}
-            <div>
-              <label htmlFor="password">رمز عبور</label>
-              <input
-                {...form.register('password')}
-                id="password"
-                type="password"
-                className={cn({
-                  'border-red-500': form.formState.errors.password,
-                })}
-              />
-              <p
-                className={cn({
-                  hidden: !form.formState.errors.password?.message,
-                })}
-              >
-                {form.formState.errors.password?.message}
-              </p>
-            </div>
+            {Object.entries(formFields).map(([key, field]) => {
+              const error =
+                form.formState.errors[
+                  key as keyof z.infer<typeof formSchema>
+                ]?.message?.toString();
+              return (
+                <div key={key} className="flex flex-col">
+                  <label htmlFor={key} className="mb-1 text-sm text-teal">
+                    {field.label}
+                  </label>
+                  <input
+                    id={key}
+                    type={field.type}
+                    {...form.register(key as keyof z.infer<typeof formSchema>)}
+                    className={cn({ 'border-red-500': !!error })}
+                  />
+                  {error ? (
+                    <p className="mt-1 text-xs text-red-500">{error}</p>
+                  ) : null}
+                </div>
+              );
+            })}
           </div>
           {/* submit */}
           <button
             type="submit"
-            disabled={isLoadingSubmitBtn}
             className="rounded-lg bg-teal p-4 text-white disabled:bg-teal/50"
           >
             ورود

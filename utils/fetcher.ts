@@ -28,7 +28,9 @@ export async function fetcher<T>(params: IParams): Promise<TResponse<T>> {
     const data: Partial<TResponse<T>> = await res.json();
     return {
       ...(data as T),
-      message: data.message || 'عملیات با موفقیت انجام شد!',
+      message:
+        data.message ||
+        (res.ok ? 'عملیات با موفقیت انجام شد!' : 'عملیات با خطا مواجه شد!'),
       status: res.ok ? 'success' : 'fail',
     } as TResponse<T>;
   } catch (error: any) {

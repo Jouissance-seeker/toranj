@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
+import { register } from '@/actions/templates/base/register';
 import { ToggleSection } from '@/components/toggle-section';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
 import { cn } from '@/utils/cn';
@@ -65,7 +66,7 @@ export function ModalRegister() {
       label: 'آدرس',
       type: 'text',
       errors: {
-        least8characters: 'آدرس باید حداقل 8 کاراکتر باشد!',
+        least8characters: 'آدرس باید حداقل 10 کاراکتر باشد!',
       },
     },
   };
@@ -86,7 +87,7 @@ export function ModalRegister() {
     confirmPassword: z.string().min(8, {
       message: formFields.confirmPassword.errors.least8characters,
     }),
-    address: z.string().min(8, {
+    address: z.string().min(10, {
       message: formFields.address.errors.least8characters,
     }),
   });
@@ -103,9 +104,24 @@ export function ModalRegister() {
     },
   });
   const handleSubmitForm = async () => {
-    toast.success('ثبت نام با موفقیت انجام شد!');
-    handleCloseModalRegister();
-    setTimeout(() => window.location.reload(), 3000);
+    const res = await register({
+      body: {
+        name: form.getValues('firstName'),
+        lastName: form.getValues('lastName'),
+        phone: form.getValues('phoneNumber'),
+        email: form.getValues('email'),
+        address: form.getValues('address'),
+        password: form.getValues('password'),
+        confirmPassword: form.getValues('confirmPassword'),
+      },
+    });
+    if (res.status === 'success') {
+      toast.success(res.message);
+      loginToggleUrlState.hide();
+      setTimeout(() => window.location.reload(), 3000);
+    } else {
+      toast.error(res.message);
+    }
   };
 
   return (

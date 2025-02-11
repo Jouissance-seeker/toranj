@@ -2,7 +2,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
-import { register } from '@/actions/templates/base/register';
 import { ToggleSection } from '@/components/toggle-section';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
 import { cn } from '@/utils/cn';
@@ -104,17 +103,6 @@ export function ModalRegister() {
     },
   });
   const handleSubmitForm = async () => {
-    register({
-      body: {
-        first_name: form.getValues('firstName'),
-        last_name: form.getValues('lastName'),
-        email: form.getValues('email'),
-        phone_number: form.getValues('phoneNumber'),
-        password: form.getValues('password'),
-        password_confirmation: form.getValues('confirmPassword'),
-        address: form.getValues('address'),
-      },
-    });
     toast.success('ثبت نام با موفقیت انجام شد!');
     handleCloseModalRegister();
     setTimeout(() => window.location.reload(), 3000);

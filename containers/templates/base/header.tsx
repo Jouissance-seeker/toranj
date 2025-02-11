@@ -1,26 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
 import { FaHeart, FaHome, FaShoppingCart } from 'react-icons/fa';
 import { IoFastFood } from 'react-icons/io5';
-import { LuLogOut } from 'react-icons/lu';
 import { PiShoppingBagOpenFill } from 'react-icons/pi';
-import { getFullname } from '@/actions/templates/base/get-fullname';
-import { logout } from '@/actions/templates/base/logout';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
 import { cn } from '@/utils/cn';
 
 export function Header() {
   const pathname = usePathname();
   const loginToggleUrlState = useToggleUrlState('login');
-  const [isAuth, setIsAuth] = useState<string | null>(null);
-  useEffect(() => {
-    getFullname().then((data) => {
-      setIsAuth(data);
-    });
-  }, []);
   const handleShowModalLogin = () => {
     loginToggleUrlState.show();
   };
@@ -51,11 +40,6 @@ export function Header() {
       path: '/cart',
     },
   ];
-  const handleLogout = () => {
-    logout();
-    toast.success('با موفقیت خارج شدید!');
-    setTimeout(() => window.location.reload(), 3000);
-  };
 
   return (
     <header className="container">
@@ -87,26 +71,12 @@ export function Header() {
           </ul>
         </nav>
         {/* login / profile || fullname / exit */}
-        {isAuth ? (
-          <div className="flex gap-2">
-            <p className="rounded-lg bg-green px-4 py-2.5 font-medium text-teal">
-              {isAuth}
-            </p>
-            <button
-              onClick={handleLogout}
-              className="relative flex items-center gap-2 rounded-lg border border-yellow p-2 text-sm text-yellow transition-all hover:bg-yellow hover:text-teal"
-            >
-              <LuLogOut size={25} />
-            </button>
-          </div>
-        ) : (
-          <button
-            onClick={handleShowModalLogin}
-            className="rounded-lg bg-green p-2.5 font-medium text-teal"
-          >
-            ورود / ثبت نام
-          </button>
-        )}
+        <button
+          onClick={handleShowModalLogin}
+          className="rounded-lg bg-green p-2.5 font-medium text-teal"
+        >
+          ورود / ثبت نام
+        </button>
       </div>
     </header>
   );

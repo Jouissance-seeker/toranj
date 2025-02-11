@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
+import { login } from '@/actions/templates/base/login';
 import { ToggleSection } from '@/components/toggle-section';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
 import { cn } from '@/utils/cn';
@@ -50,7 +51,19 @@ export function ModalLogin() {
     },
   });
   const handleSubmitForm = async () => {
-    toast.success('ورود با موفقیت انجام شد!');
+    const res = await login({
+      body: {
+        phone: form.getValues('phoneNumber'),
+        password: form.getValues('password'),
+      },
+    });
+    if (res.status === 'success') {
+      toast.success(res.message);
+      loginToggleUrlState.hide();
+      setTimeout(() => window.location.reload(), 3000);
+    } else {
+      toast.error(res.message);
+    }
   };
 
   return (

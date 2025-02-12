@@ -36,7 +36,6 @@ export function ToggleSection(props: IToggleSectionProps) {
             <div className="absolute -top-10 right-2.5 flex p-1">
               <button
                 onClick={() => {
-                  console.log('Close button clicked');
                   props.onClose();
                 }}
                 className="flex size-8 items-center justify-center overflow-hidden rounded-lg bg-red-500"

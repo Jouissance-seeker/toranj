@@ -26,6 +26,7 @@ export async function fetcher<T>(params: IParams): Promise<TResponse<T>> {
       body,
     });
     const data: Partial<TResponse<T>> = await res.json();
+    //console.log(data);
     return {
       ...(data as T),
       message:

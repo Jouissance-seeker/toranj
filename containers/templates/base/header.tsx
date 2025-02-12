@@ -1,10 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { FaHeart, FaHome, FaShoppingCart } from 'react-icons/fa';
 import { IoFastFood } from 'react-icons/io5';
+import { LuLogOut } from 'react-icons/lu';
 import { PiShoppingBagOpenFill } from 'react-icons/pi';
+import { getAuth } from '@/actions/templates/base/getAuth';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
+import { TUser } from '@/types/user';
 import { cn } from '@/utils/cn';
 
 export function Header() {
@@ -40,6 +44,19 @@ export function Header() {
       path: '/cart',
     },
   ];
+  const [auth, setAuth] = useState<{
+    isLoggined: boolean;
+    data: TUser | null;
+  }>({
+    isLoggined: false,
+    data: null,
+  });
+  useEffect(() => {
+    (async () => {
+      const auth = await getAuth();
+      setAuth(auth);
+    })();
+  }, []);
 
   return (
     <header className="container">
@@ -70,13 +87,30 @@ export function Header() {
             ))}
           </ul>
         </nav>
-        {/* login / profile || fullname / exit */}
-        <button
-          onClick={handleShowModalLogin}
-          className="rounded-lg bg-green p-2.5 font-medium text-teal"
-        >
-          ورود / ثبت نام
-        </button>
+        {/* login / profile || fullname / logout */}
+        {auth.isLoggined ? (
+          <div className="flex items-center gap-3">
+            <Link
+              href="/profile"
+              className="rounded-lg bg-green p-2.5 font-medium text-teal"
+            >
+              {`${auth.data?.name} ${auth.data?.lastName}`}
+            </Link>
+            <button>
+              <div className="relative flex items-center gap-2 rounded-lg border border-yellow p-2 text-sm text-yellow transition-all hover:bg-yellow hover:text-teal">
+                <p className="whitespace-nowrap text-smp">خروج</p>
+                <LuLogOut size={25} />
+              </div>
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={handleShowModalLogin}
+            className="rounded-lg bg-green p-2.5 font-medium text-teal"
+          >
+            ورود / ثبت نام
+          </button>
+        )}
       </div>
     </header>
   );

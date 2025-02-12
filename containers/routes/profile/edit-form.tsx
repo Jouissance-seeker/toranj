@@ -103,11 +103,11 @@ export function EditForm() {
   useEffect(() => {
     if (fetchAuth.data) {
       form.reset({
-        firstName: fetchAuth.data.user.name,
-        lastName: fetchAuth.data.user.lastName,
-        email: fetchAuth.data.user.email,
-        phoneNumber: fetchAuth.data.user.phone,
-        address: fetchAuth.data.user.address,
+        firstName: fetchAuth.data.name,
+        lastName: fetchAuth.data.lastName,
+        email: fetchAuth.data.email,
+        phoneNumber: fetchAuth.data.phone,
+        address: fetchAuth.data.address,
       });
     }
   }, [fetchAuth.data]);

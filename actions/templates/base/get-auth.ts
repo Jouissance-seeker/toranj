@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 import { TUser } from '@/types/user';
 import { fetcher } from '@/utils/fetcher';
 
-type TReturn = Promise<{ user: TUser } | null>;
+type TReturn = Promise<TUser | null>;
 
 export async function APIgetAuth(): TReturn {
   const cookieStore = await cookies();
@@ -16,5 +16,5 @@ export async function APIgetAuth(): TReturn {
     contentType: 'json',
   });
   if (!data.user) return null;
-  return { user: data.user };
+  return data.user;
 }

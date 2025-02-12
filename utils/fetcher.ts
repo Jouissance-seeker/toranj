@@ -20,7 +20,7 @@ export async function fetcher<T>({
 }: IParams): Promise<TResponse<T>> {
   try {
     const cookieStore = await cookies();
-    const token = cookieStore.get('auth')?.value;
+    const token = cookieStore.get('token')?.value;
     const baseUrl = 'http://localhost:5000';
     const headers: HeadersInit = {
       ...(contentType === 'json' && { 'Content-Type': 'application/json' }),

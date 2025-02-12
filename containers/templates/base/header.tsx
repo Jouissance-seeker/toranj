@@ -91,7 +91,7 @@ export function Header() {
               href="/profile"
               className="max-w-32 truncate rounded-lg bg-green p-2.5 font-medium text-teal"
             >
-              {fetchAuth.data.user.name} {fetchAuth.data.user.lastName}
+              {fetchAuth.data.name} {fetchAuth.data.lastName}
             </Link>
             <button onClick={handleLogout}>
               <div className="relative flex items-center gap-2 rounded-lg border border-yellow p-2 text-sm text-yellow transition-all hover:bg-yellow hover:text-teal">

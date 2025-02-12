@@ -1,4 +1,4 @@
-'use server';
+import { cookies } from 'next/headers';
 
 interface IParams {
   endpoint: string;
@@ -14,9 +14,14 @@ type TResponse<T> = {
 
 export async function fetcher<T>(params: IParams): Promise<TResponse<T>> {
   try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get('auth')?.value;
     const baseUrl = 'http://localhost:5000';
     const isJson = params.contentType === 'json';
-    const headers = isJson ? { 'Content-Type': 'application/json' } : undefined;
+    const headers: HeadersInit = {
+      ...(isJson ? { 'Content-Type': 'application/json' } : {}),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    };
     const body = isJson
       ? JSON.stringify(params.body)
       : (params.body as unknown as FormData);
@@ -26,7 +31,6 @@ export async function fetcher<T>(params: IParams): Promise<TResponse<T>> {
       body,
     });
     const data: Partial<TResponse<T>> = await res.json();
-    //console.log(data);
     return {
       ...(data as T),
       message:

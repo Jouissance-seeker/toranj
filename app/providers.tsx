@@ -1,5 +1,7 @@
 'use client';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { AppProgressBar } from 'next-nprogress-bar';
 import type { ReactNode } from 'react';
 import { Suspense } from 'react';
@@ -25,12 +27,24 @@ const Toast = () => {
   return <Toaster />;
 };
 
+const ReactQuery = ({ children }: IProps) => {
+  const queryClient = new QueryClient();
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      {children}
+    </QueryClientProvider>
+  );
+};
+
 export default function Providers({ children }: IProps) {
   return (
     <>
       <Toast />
       <ProgressBar />
-      <Suspense fallback={<Loader />}>{children}</Suspense>
+      <ReactQuery>
+        <Suspense fallback={<Loader />}>{children}</Suspense>
+      </ReactQuery>
     </>
   );
 }

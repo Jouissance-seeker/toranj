@@ -31,7 +31,7 @@ export async function APIregister(params: IParams): TReturn {
   });
   if (data.token) {
     const cookieStore = await cookies();
-    cookieStore.set('auth', data.token, {
+    cookieStore.set('token', data.token, {
       path: '/',
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',

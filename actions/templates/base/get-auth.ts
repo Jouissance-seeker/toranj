@@ -8,7 +8,7 @@ type TReturn = Promise<{ user: TUser } | null>;
 
 export async function APIgetAuth(): TReturn {
   const cookieStore = await cookies();
-  const token = cookieStore.get('auth')?.value;
+  const token = cookieStore.get('token')?.value;
   if (!token) return null;
   const data = await fetcher<{ user: TUser }>({
     endpoint: '/auth/getMe',

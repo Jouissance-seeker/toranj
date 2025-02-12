@@ -2,10 +2,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
+import toast from 'react-hot-toast';
 import { BiSolidCategory } from 'react-icons/bi';
 import { FaShoppingCart, FaUsers } from 'react-icons/fa';
 import { LuLogOut } from 'react-icons/lu';
 import { PiShoppingBagOpenFill } from 'react-icons/pi';
+import { APIlogout } from '@/actions/templates/base/logout';
 import { cn } from '@/utils/cn';
 
 export function Header() {
@@ -50,6 +52,11 @@ interface IDesktopProps {
 
 const Desktop = (props: IDesktopProps) => {
   const pathname = usePathname();
+  const handleLogout = () => {
+    APIlogout();
+    toast.success('با موفقیت خارج شدید');
+    setTimeout(() => window.location.reload(), 3000);
+  };
 
   return (
     <div className="relative hidden size-full w-56 border bg-teal p-4 text-white lg:block">
@@ -82,7 +89,10 @@ const Desktop = (props: IDesktopProps) => {
         </ul>
       </nav>
       {/* logout btn */}
-      <button className="absolute bottom-5 left-1/2 -translate-x-1/2">
+      <button
+        onClick={handleLogout}
+        className="absolute bottom-5 left-1/2 -translate-x-1/2"
+      >
         <div className="relative flex items-center gap-2 rounded-lg border border-yellow px-3 py-2 text-sm text-yellow transition-all hover:bg-yellow hover:text-teal">
           <LuLogOut size={25} />
           <p className="whitespace-nowrap text-smp">خروج</p>

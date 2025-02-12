@@ -6,5 +6,5 @@ type TReturn = Promise<void>;
 
 export async function APIlogout(): TReturn {
   const cookieStore = await cookies();
-  cookieStore.delete('auth');
+  cookieStore.delete('token');
 }

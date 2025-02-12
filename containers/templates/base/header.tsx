@@ -6,7 +6,7 @@ import { FaHeart, FaHome, FaShoppingCart } from 'react-icons/fa';
 import { IoFastFood } from 'react-icons/io5';
 import { LuLogOut } from 'react-icons/lu';
 import { PiShoppingBagOpenFill } from 'react-icons/pi';
-import { getAuth } from '@/actions/templates/base/getAuth';
+import { getAuth } from '@/actions/templates/base/get-auth';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
 import { TUser } from '@/types/user';
 import { cn } from '@/utils/cn';

@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
+import { APIupdateAuth } from '@/actions/routes/profile/update-auth';
 import { APIgetAuth } from '@/actions/templates/base/get-auth';
-import { APIupdateAuth } from '@/actions/templates/profile/update-auth';
 import { cn } from '@/utils/cn';
 
 export function EditForm() {

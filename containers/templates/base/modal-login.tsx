@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
-import { login } from '@/actions/templates/base/login';
+import { APIlogin } from '@/actions/templates/base/login';
 import { ToggleSection } from '@/components/toggle-section';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
 import { cn } from '@/utils/cn';
@@ -54,7 +54,7 @@ export function ModalLogin() {
   });
   const handleSubmitForm = async () => {
     setFormIsLoading(true);
-    const res = await login({
+    const res = await APIlogin({
       body: {
         phone: form.getValues('phoneNumber'),
         password: form.getValues('password'),

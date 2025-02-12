@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
-import { register } from '@/actions/templates/base/register';
+import { APIregister } from '@/actions/templates/base/register';
 import { ToggleSection } from '@/components/toggle-section';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
 import { cn } from '@/utils/cn';
@@ -107,7 +107,7 @@ export function ModalRegister() {
   });
   const handleSubmitForm = async () => {
     setFormIsLoading(true);
-    const res = await register({
+    const res = await APIregister({
       body: {
         name: form.getValues('firstName'),
         lastName: form.getValues('lastName'),

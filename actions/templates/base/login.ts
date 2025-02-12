@@ -15,7 +15,7 @@ type TReturn = Promise<{
   status: 'success' | 'fail';
 }>;
 
-export async function login(params: IParams): TReturn {
+export async function APIlogin(params: IParams): TReturn {
   const data = await fetcher<{
     token: string;
   }>({

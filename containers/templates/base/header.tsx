@@ -2,11 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import toast from 'react-hot-toast';
 import { FaHeart, FaHome, FaShoppingCart } from 'react-icons/fa';
 import { IoFastFood } from 'react-icons/io5';
 import { LuLogOut } from 'react-icons/lu';
 import { PiShoppingBagOpenFill } from 'react-icons/pi';
-import { getAuth } from '@/actions/templates/base/get-auth';
+import { APIgetAuth } from '@/actions/templates/base/get-auth';
+import { APIlogout } from '@/actions/templates/base/logout';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
 import { cn } from '@/utils/cn';
 
@@ -45,8 +47,13 @@ export function Header() {
   ];
   const fetchAuth = useQuery({
     queryKey: ['auth'],
-    queryFn: () => getAuth(),
+    queryFn: () => APIgetAuth(),
   });
+  const handleLogout = () => {
+    APIlogout();
+    toast.success('با موفقیت خارج شدید');
+    setTimeout(() => window.location.reload(), 3000);
+  };
 
   return (
     <header className="container">
@@ -86,7 +93,7 @@ export function Header() {
             >
               {fetchAuth.data.user.name} {fetchAuth.data.user.lastName}
             </Link>
-            <button>
+            <button onClick={handleLogout}>
               <div className="relative flex items-center gap-2 rounded-lg border border-yellow p-2 text-sm text-yellow transition-all hover:bg-yellow hover:text-teal">
                 <p className="whitespace-nowrap text-smp">خروج</p>
                 <LuLogOut size={25} />

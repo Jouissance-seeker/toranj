@@ -20,7 +20,7 @@ type TReturn = Promise<{
   status: 'success' | 'fail';
 }>;
 
-export async function register(params: IParams): TReturn {
+export async function APIregister(params: IParams): TReturn {
   const data = await fetcher<{
     token: string;
   }>({

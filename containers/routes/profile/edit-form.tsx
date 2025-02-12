@@ -1,11 +1,18 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { z } from 'zod';
+import { APIgetAuth } from '@/actions/templates/base/get-auth';
+import { APIupdateAuth } from '@/actions/templates/profile/update-auth';
 import { cn } from '@/utils/cn';
 
 export function EditForm() {
+  // form
+  const [formIsLoading, setFormIsLoading] = useState(false);
   const formFields = {
     firstName: {
       label: 'نام',
@@ -69,8 +76,41 @@ export function EditForm() {
     },
   });
   const handleSubmitForm = async () => {
-    // ...
+    setFormIsLoading(true);
+    const res = await APIupdateAuth({
+      body: {
+        name: form.getValues('firstName'),
+        lastName: form.getValues('lastName'),
+        email: form.getValues('email'),
+        phone: form.getValues('phoneNumber'),
+        address: form.getValues('address'),
+      },
+    });
+    setFormIsLoading(false);
+    if (res.status === 'success') {
+      toast.success(res.message);
+      setTimeout(() => window.location.reload(), 3000);
+    } else {
+      toast.error(res.message);
+    }
   };
+
+  // fill form with user data
+  const fetchAuth = useQuery({
+    queryKey: ['auth'],
+    queryFn: () => APIgetAuth(),
+  });
+  useEffect(() => {
+    if (fetchAuth.data) {
+      form.reset({
+        firstName: fetchAuth.data.user.name,
+        lastName: fetchAuth.data.user.lastName,
+        email: fetchAuth.data.user.email,
+        phoneNumber: fetchAuth.data.user.phone,
+        address: fetchAuth.data.user.address,
+      });
+    }
+  }, [fetchAuth.data]);
 
   return (
     <section>
@@ -106,6 +146,7 @@ export function EditForm() {
         {/* submit */}
         <button
           type="submit"
+          disabled={formIsLoading}
           className="rounded-lg bg-teal p-4 text-white disabled:bg-teal/50"
         >
           ذخیره

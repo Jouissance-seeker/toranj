@@ -89,7 +89,7 @@ export function Header() {
           <div className="flex items-center gap-3">
             <Link
               href="/profile"
-              className="rounded-lg bg-green p-2.5 font-medium text-teal"
+              className="max-w-32 truncate rounded-lg bg-green p-2.5 font-medium text-teal"
             >
               {fetchAuth.data.user.name} {fetchAuth.data.user.lastName}
             </Link>

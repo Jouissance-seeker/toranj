@@ -1,12 +1,9 @@
 'use client';
 
 import 'swiper/css';
-import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { APIgetCategories } from '@/actions/routes/home/get-categories';
-import { Loader } from '@/components/loader';
 import { ProductCard } from '@/components/product-card';
 import { categoriesData } from '@/resources/categories';
 import { cn } from '@/utils/cn';
@@ -39,14 +36,6 @@ const Top = (props: ITopProps) => {
   const handleActiveCategory = (value: number) => {
     props.setActivedIndex(value);
   };
-  const fetchCategories = useQuery({
-    queryKey: ['categories'],
-    queryFn: () => APIgetCategories(),
-  });
-
-  if (fetchCategories.isLoading) {
-    return <Loader />;
-  }
 
   return (
     <div className="flex justify-center">
@@ -56,8 +45,8 @@ const Top = (props: ITopProps) => {
         onSwiper={(swiper) => (props.swiperRef.current = swiper)}
         id="categories-slider"
       >
-        {fetchCategories.data?.map((item, index) => (
-          <SwiperSlide key={item._id} className="!w-fit rounded-lg">
+        {categoriesData.map((item, index) => (
+          <SwiperSlide key={item.id} className="!w-fit rounded-lg">
             <button
               onClick={() => handleActiveCategory(index)}
               className={cn(

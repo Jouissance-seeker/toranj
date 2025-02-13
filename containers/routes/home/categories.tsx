@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { APIgetCategories } from '@/actions/routes/home/get-categories';
+import { Loader } from '@/components/loader';
 import { ProductCard } from '@/components/product-card';
 import { categoriesData } from '@/resources/categories';
 import { cn } from '@/utils/cn';
@@ -42,6 +43,10 @@ const Top = (props: ITopProps) => {
     queryKey: ['categories'],
     queryFn: () => APIgetCategories(),
   });
+
+  if (fetchCategories.isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="flex justify-center">

@@ -14,13 +14,14 @@ import { formatPrice } from '@/utils/format-price';
 export function ModalProduct() {
   const searchParams = useSearchParams();
   const data = {
-    id: Number(searchParams.get('id') || 0),
+    _id: String(searchParams.get('id') || ''),
     image: searchParams.get('image') || '',
     title: searchParams.get('title') || '',
     description: searchParams.get('description') || '',
-    discount: Number(searchParams.get('discount')) || 0,
-    priceWithoutDiscount: Number(searchParams.get('priceWithoutDiscount')) || 0,
-    priceWithDiscount: Number(searchParams.get('priceWithDiscount')) || 0,
+    discount: String(searchParams.get('discount')) || '',
+    priceWithoutDiscount:
+      String(searchParams.get('priceWithoutDiscount')) || '',
+    priceWithDiscount: String(searchParams.get('priceWithDiscount')) || '',
   };
   const localstorageCart = useKillua(cartSlice);
   const handleAddToCart = () => localstorageCart.reducers.add(data);
@@ -32,7 +33,7 @@ export function ModalProduct() {
   const productToggleUrlState = useToggleUrlState('product');
   const localstorageFavorite = useKillua(favoriteSlice);
   const handleToggleFavorite = () => {
-    if (localstorageFavorite.selectors.isInFavorites(data.id)) {
+    if (localstorageFavorite.selectors.isInFavorites(data._id)) {
       localstorageFavorite.reducers.remove(data);
     } else {
       localstorageFavorite.reducers.add(data);
@@ -72,7 +73,7 @@ export function ModalProduct() {
               onClick={handleToggleFavorite}
               className="absolute left-3 top-3"
             >
-              {localstorageFavorite.selectors.isInFavorites(data.id) ? (
+              {localstorageFavorite.selectors.isInFavorites(data._id) ? (
                 <IoMdHeart size={25} className="fill-red-500" />
               ) : (
                 <IoMdHeartEmpty size={25} className="fill-gray-400" />
@@ -118,17 +119,17 @@ export function ModalProduct() {
               <div>
                 <div
                   className={cn('flex gap-2', {
-                    hidden: data.discount === 0,
+                    hidden: data.discount === '',
                   })}
                 >
                   <p className="text-sm text-gray-500 line-through">
-                    {formatPrice(data.priceWithoutDiscount)}
+                    {formatPrice(Number(data.priceWithoutDiscount))}
                   </p>
                   <p className="rounded-md bg-yellow px-2 py-0.5 text-sm text-white">
                     %{data.discount}
                   </p>
                 </div>
-                <p>{formatPrice(data.priceWithDiscount)}</p>
+                <p>{formatPrice(Number(data.priceWithDiscount))}</p>
               </div>
             </div>
           </>

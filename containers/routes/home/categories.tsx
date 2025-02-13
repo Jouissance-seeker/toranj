@@ -97,7 +97,7 @@ const Bottom = (props: IBottomProps) => {
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {categoriesData[props.activedIndex]?.children?.map((item) => (
-        <ProductCard key={item.id} data={item} />
+        <ProductCard key={item._id} data={item} />
       ))}
     </div>
   );

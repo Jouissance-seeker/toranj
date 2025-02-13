@@ -6,8 +6,8 @@ export const favoriteSlice = slice({
   defaultClient: [] as TProduct[],
   defaultServer: [],
   selectors: {
-    isInFavorites: (value, payload: number) =>
-      value.some((product) => product.id === payload),
+    isInFavorites: (value, payload: string) =>
+      value.some((product) => product._id === payload),
     isEmpty: (value) => value.length === 0,
   },
   reducers: {
@@ -15,7 +15,7 @@ export const favoriteSlice = slice({
       return [...value, payload];
     },
     remove: (value, payload: TProduct) => [
-      ...value.filter((product) => product.id !== payload.id),
+      ...value.filter((product) => product._id !== payload._id),
     ],
   },
 });

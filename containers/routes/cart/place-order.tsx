@@ -14,7 +14,7 @@ export function PlaceOrder() {
       <div className="mb-1.5 flex flex-col gap-0.5 overflow-y-auto border-b pb-1.5">
         {localstorageCart.get().map((item) => (
           <div
-            key={item.id}
+            key={item._id}
             className="flex w-full items-center justify-between text-smp text-gray-500"
           >
             <div className="flex w-full items-center ">
@@ -22,7 +22,7 @@ export function PlaceOrder() {
               <p> × {item.quantity}</p>
             </div>
             <p className="whitespace-nowrap">
-              {formatPrice(item.priceWithDiscount * item.quantity)}
+              {formatPrice(Number(item.priceWithDiscount) * item.quantity)}
             </p>
           </div>
         ))}

@@ -28,7 +28,7 @@ export function ProductCard({ data }: IProductCardProps) {
     localstorageCart.reducers.decrement(data);
   const handleRemoveFromCart = () => localstorageCart.reducers.remove(data);
   const handleToggleFavorite = () => {
-    if (localstorageFavorite.selectors.isInFavorites(data.id)) {
+    if (localstorageFavorite.selectors.isInFavorites(data._id)) {
       localstorageFavorite.reducers.remove(data);
     } else {
       localstorageFavorite.reducers.add(data);
@@ -36,7 +36,7 @@ export function ProductCard({ data }: IProductCardProps) {
   };
   const handleSeeProduct = () =>
     productToggleUrlState.show({
-      id: String(data.id),
+      id: String(data._id),
       image: data.image,
       title: data.title,
       description: data.description,
@@ -47,7 +47,7 @@ export function ProductCard({ data }: IProductCardProps) {
 
   return (
     <div
-      key={data.id}
+      key={data._id}
       className="group relative flex flex-col justify-between rounded-xl border bg-white p-3"
     >
       {/* image / title / description */}
@@ -63,7 +63,7 @@ export function ProductCard({ data }: IProductCardProps) {
       {/* like / see */}
       <div className="absolute left-2 top-3 flex flex-col gap-1">
         <button onClick={handleToggleFavorite}>
-          {localstorageFavorite.selectors.isInFavorites(data.id) ? (
+          {localstorageFavorite.selectors.isInFavorites(data._id) ? (
             <IoMdHeart size={22} className="fill-red-500" />
           ) : (
             <IoMdHeartEmpty size={22} className="fill-gray-400" />

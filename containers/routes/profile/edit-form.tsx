@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
@@ -12,7 +12,6 @@ import { cn } from '@/utils/cn';
 
 export function EditForm() {
   // form
-  const [formIsLoading, setFormIsLoading] = useState(false);
   const formFields = {
     firstName: {
       label: 'نام',
@@ -76,7 +75,6 @@ export function EditForm() {
     },
   });
   const handleSubmitForm = async () => {
-    setFormIsLoading(true);
     const res = await APIupdateAuth({
       body: {
         name: form.getValues('firstName'),
@@ -86,7 +84,6 @@ export function EditForm() {
         address: form.getValues('address'),
       },
     });
-    setFormIsLoading(false);
     if (res.status === 'success') {
       toast.success(res.message);
       setTimeout(() => window.location.reload(), 3000);
@@ -144,11 +141,7 @@ export function EditForm() {
           })}
         </div>
         {/* submit */}
-        <button
-          type="submit"
-          disabled={formIsLoading}
-          className="rounded-lg bg-teal p-4 text-white disabled:bg-teal/50"
-        >
+        <button type="submit" className="rounded-lg bg-teal p-4 text-white">
           ذخیره
         </button>
       </form>

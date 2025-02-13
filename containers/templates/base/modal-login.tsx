@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
@@ -20,7 +19,6 @@ export function ModalLogin() {
   };
 
   // form
-  const [formIsLoading, setFormIsLoading] = useState(false);
   const formFields = {
     phoneNumber: {
       type: 'number',
@@ -53,14 +51,12 @@ export function ModalLogin() {
     },
   });
   const handleSubmitForm = async () => {
-    setFormIsLoading(true);
     const res = await APIlogin({
       body: {
         phone: form.getValues('phoneNumber'),
         password: form.getValues('password'),
       },
     });
-    setFormIsLoading(false);
     if (res.status === 'success') {
       toast.success(res.message);
       loginToggleUrlState.hide();
@@ -122,9 +118,8 @@ export function ModalLogin() {
           </div>
           {/* submit */}
           <button
-            disabled={formIsLoading}
             type="submit"
-            className="rounded-lg bg-teal p-4 text-white transition-all disabled:bg-teal/50"
+            className="rounded-lg bg-teal p-4 text-white transition-all"
           >
             ورود
           </button>

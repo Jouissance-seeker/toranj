@@ -10,11 +10,10 @@ export async function APIgetAuth(): TReturn {
   const cookieStore = await cookies();
   const token = cookieStore.get('token')?.value;
   if (!token) return null;
-  const data = await fetcher<{ user: TUser }>({
+  const res = await fetcher<{ user: TUser }>({
     endpoint: '/auth/getMe',
     method: 'get',
     contentType: 'json',
   });
-  if (!data.user) return null;
-  return data.user;
+  return res.data?.user || null;
 }

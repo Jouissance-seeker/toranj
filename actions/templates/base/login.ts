@@ -16,7 +16,7 @@ type TReturn = Promise<{
 }>;
 
 export async function APIlogin(params: IParams): TReturn {
-  const data = await fetcher<{
+  const res = await fetcher<{
     token: string;
   }>({
     endpoint: '/auth/login',
@@ -24,14 +24,22 @@ export async function APIlogin(params: IParams): TReturn {
     contentType: 'json',
     body: params.body,
   });
-  if (data.token) {
-    const cookieStore = await cookies();
-    cookieStore.set('token', data.token, {
-      path: '/',
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-    });
+
+  // set token to cookie
+  if (res.status === 'success') {
+    if (res.data?.token) {
+      const cookieStore = await cookies();
+      cookieStore.set('token', res.data.token, {
+        path: '/',
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+      });
+    }
   }
-  return data;
+
+  return {
+    message: res.message,
+    status: res.status,
+  };
 }

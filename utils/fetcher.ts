@@ -1,54 +1,51 @@
 import { cookies } from 'next/headers';
 
-interface IParams {
+type IParams = {
   endpoint: string;
-  method: 'post' | 'get' | 'put' | 'delete';
-  contentType?: 'json' | 'formData';
+  method: 'get' | 'post' | 'put' | 'delete';
+  contentType: 'json' | 'form-data';
   body?: Record<string, any> | FormData;
-}
+};
 
-type TResponse<T> = {
+type TReturn<T> = {
   message: string;
   status: 'success' | 'fail';
-} & Partial<T>;
+  data?: T;
+};
 
-export async function fetcher<T>({
-  endpoint,
-  method,
-  contentType = 'json',
-  body,
-}: IParams): Promise<TResponse<T>> {
-  try {
-    const cookieStore = await cookies();
-    const token = cookieStore.get('token')?.value;
-    const baseUrl = 'http://localhost:5000';
-    const headers: HeadersInit = {
-      ...(contentType === 'json' && { 'Content-Type': 'application/json' }),
-      ...(token && { Authorization: `Bearer ${token}` }),
-    };
-    const requestBody =
-      contentType === 'json' && body && !(body instanceof FormData)
-        ? JSON.stringify(body)
-        : (body as FormData);
-    const response = await fetch(`${baseUrl}${endpoint}`, {
-      method,
-      headers,
-      body: requestBody,
-    });
-    const data: Partial<TResponse<T>> = await response.json();
-    return {
-      ...data,
-      message:
-        data.message ??
-        (response.ok
-          ? 'عملیات با موفقیت انجام شد!'
-          : 'عملیات با خطا مواجه شد!'),
-      status: response.ok ? 'success' : 'fail',
-    } as TResponse<T>;
-  } catch (error) {
-    return {
-      message: (error as Error).message || 'یک خطای غیرمنتظره رخ داد!',
-      status: 'fail',
-    } as TResponse<T>;
+export async function fetcher<T>(params: IParams): Promise<TReturn<T>> {
+  const headers: HeadersInit = {};
+  let bodyData: BodyInit | undefined;
+  const BASE_URL = 'http://localhost:5000';
+  const cookieStore = await cookies();
+  const token = cookieStore.get('token')?.value;
+
+  // set authorization header if token exists
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
   }
+
+  // set content-Type / set body data
+  if (params.contentType === 'json') {
+    headers['Content-Type'] = 'application/json';
+    bodyData = params.body ? JSON.stringify(params.body) : undefined;
+  } else if (
+    params.contentType === 'form-data' &&
+    params.body instanceof FormData
+  ) {
+    bodyData = params.body;
+  }
+
+  const response = await fetch(`${BASE_URL}${params.endpoint}`, {
+    method: params.method,
+    headers,
+    body: bodyData,
+  });
+  const data = await response.json();
+
+  return {
+    data: data,
+    message: data.message,
+    status: !response.ok ? 'fail' : 'success',
+  };
 }

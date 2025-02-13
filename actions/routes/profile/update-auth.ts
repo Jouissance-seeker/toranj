@@ -18,11 +18,15 @@ type TReturn = Promise<{
 }>;
 
 export async function APIupdateAuth(params: IParams): TReturn {
-  const data = await fetcher({
+  const res = await fetcher({
     endpoint: '/users/edit',
     method: 'put',
     contentType: 'json',
     body: params.body,
   });
-  return data;
+
+  return {
+    message: res.message,
+    status: res.status,
+  };
 }

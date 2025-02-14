@@ -104,7 +104,7 @@ export function ProductCard({ data }: IProductCardProps) {
         <div>
           <div
             className={cn('flex gap-2', {
-              hidden: data.discount === '0',
+              hidden: data.discount === 0,
             })}
           >
             <p className="text-sm text-gray-500 line-through">

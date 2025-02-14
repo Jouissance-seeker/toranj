@@ -18,7 +18,7 @@ export function ModalProduct() {
     image: searchParams.get('image') || '',
     title: searchParams.get('title') || '',
     description: searchParams.get('description') || '',
-    discount: searchParams.get('discount') || '0',
+    discount: Number(searchParams.get('discount')) || 0,
     priceWithoutDiscount: Number(searchParams.get('priceWithoutDiscount')) || 0,
     priceWithDiscount: Number(searchParams.get('priceWithDiscount')) || 0,
   };
@@ -118,7 +118,7 @@ export function ModalProduct() {
               <div>
                 <div
                   className={cn('flex gap-2', {
-                    hidden: data.discount === '0',
+                    hidden: data.discount === 0,
                   })}
                 >
                   <p className="text-sm text-gray-500 line-through">

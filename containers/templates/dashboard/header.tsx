@@ -13,16 +13,6 @@ import { cn } from '@/utils/cn';
 export function Header() {
   const navItems = [
     {
-      text: 'سفارشات',
-      icon: <PiShoppingBagOpenFill size={27} />,
-      path: '/dashboard/orders',
-    },
-    {
-      text: 'کاربران',
-      icon: <FaUsers size={27} />,
-      path: '/dashboard/users',
-    },
-    {
       text: 'دسته بندی',
       icon: <BiSolidCategory size={27} />,
       path: '/dashboard/categories',
@@ -31,6 +21,16 @@ export function Header() {
       text: 'محصولات',
       icon: <FaShoppingCart size={27} />,
       path: '/dashboard/products',
+    },
+    {
+      text: 'سفارشات',
+      icon: <PiShoppingBagOpenFill size={27} />,
+      path: '/dashboard/orders',
+    },
+    {
+      text: 'کاربران',
+      icon: <FaUsers size={27} />,
+      path: '/dashboard/users',
     },
   ];
 

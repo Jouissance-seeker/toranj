@@ -27,7 +27,7 @@ export function FilterCategories() {
 
 interface ICheckboxItemProps {
   data: {
-    id: number;
+    id: string;
     image: string;
     title: string;
     children: TProduct[];
@@ -42,13 +42,15 @@ const CheckboxItem = (props: ICheckboxItemProps) => {
   useEffect(() => {
     const paramValues =
       searchParams.get(queryKey)?.split(',').map(Number) || [];
-    setIsChecked(paramValues.includes(props.data.id));
+    setIsChecked(paramValues.includes(Number(props.data.id)));
   }, [searchParams, queryKey, props.data.id]);
   const handleCheck = () => {
     updateQuery((prev) => {
       const currentValues = prev[queryKey]?.split(',').map(Number) || [];
       const updatedValues = isChecked
-        ? currentValues.filter((value: number) => value !== props.data.id)
+        ? currentValues.filter(
+            (value: number) => value !== Number(props.data.id),
+          )
         : [...currentValues, props.data.id];
       return {
         ...prev,

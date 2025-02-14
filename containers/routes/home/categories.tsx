@@ -6,9 +6,9 @@ import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { APIgetCategories } from '@/actions/routes/home/get-categories';
+import { APIgetProductsByCategoryId } from '@/actions/routes/home/get-product-by-category-id';
 import { Loader } from '@/components/loader';
 import { ProductCard } from '@/components/product-card';
-import { categoriesData } from '@/resources/categories';
 import { cn } from '@/utils/cn';
 
 export function Categories() {
@@ -94,9 +94,30 @@ interface IBottomProps {
 }
 
 const Bottom = (props: IBottomProps) => {
+  const fetchCategories = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => APIgetCategories(),
+  });
+  const fetchProductsByCategory = useQuery({
+    queryKey: [
+      'products-by-category',
+      fetchCategories.data?.[props.activedIndex]?._id,
+    ],
+    queryFn: () =>
+      APIgetProductsByCategoryId({
+        path: {
+          categoryId: fetchCategories.data?.[props.activedIndex]?._id ?? '0',
+        },
+      }),
+  });
+
+  if (fetchProductsByCategory.isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {categoriesData[props.activedIndex]?.children?.map((item) => (
+      {fetchProductsByCategory.data?.map((item) => (
         <ProductCard key={item._id} data={item} />
       ))}
     </div>

@@ -1,13 +1,13 @@
 import { TProduct } from '@/types/product';
 
 export const categoriesData: {
-  id: number;
+  id: string;
   image: string;
   title: string;
   children: TProduct[];
 }[] = [
   {
-    id: 1,
+    id: '1',
     image:
       'https://ezteam.ir/toranj/wp-content/uploads/2024/02/image_2024-02-04_091853870.png',
     title: 'ساندویچ',

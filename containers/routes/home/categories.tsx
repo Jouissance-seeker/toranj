@@ -7,6 +7,7 @@ import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { APIgetCategories } from '@/actions/routes/home/get-categories';
 import { APIgetProductsByCategoryId } from '@/actions/routes/home/get-product-by-category-id';
+import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
 import { ProductCard } from '@/components/product-card';
 import { cn } from '@/utils/cn';
@@ -113,6 +114,10 @@ const Bottom = (props: IBottomProps) => {
 
   if (fetchProductsByCategory.isLoading) {
     return <Loader />;
+  }
+
+  if (fetchProductsByCategory.data?.length === 0) {
+    return <Empty text="محصولی برای نمایش وجود ندارد!" />;
   }
 
   return (

@@ -4,6 +4,6 @@ export type TProduct = {
   description: string;
   discount: string;
   image: string;
-  priceWithoutDiscount: string;
-  priceWithDiscount: string;
+  priceWithoutDiscount: number;
+  priceWithDiscount: number;
 };

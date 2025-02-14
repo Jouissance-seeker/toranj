@@ -18,10 +18,9 @@ export function ModalProduct() {
     image: searchParams.get('image') || '',
     title: searchParams.get('title') || '',
     description: searchParams.get('description') || '',
-    discount: String(searchParams.get('discount')) || '',
-    priceWithoutDiscount:
-      String(searchParams.get('priceWithoutDiscount')) || '',
-    priceWithDiscount: String(searchParams.get('priceWithDiscount')) || '',
+    discount: searchParams.get('discount') || '0',
+    priceWithoutDiscount: searchParams.get('priceWithoutDiscount') || '0',
+    priceWithDiscount: searchParams.get('priceWithDiscount') || '0',
   };
   const localstorageCart = useKillua(cartSlice);
   const handleAddToCart = () => localstorageCart.reducers.add(data);

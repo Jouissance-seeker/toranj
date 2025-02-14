@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { ReactNode } from 'react';
 import toast from 'react-hot-toast';
 import { BiSolidCategory } from 'react-icons/bi';
@@ -51,9 +51,11 @@ interface IDesktopProps {
 }
 
 const Desktop = (props: IDesktopProps) => {
+  const router = useRouter();
   const pathname = usePathname();
   const handleLogout = () => {
     APIlogout();
+    router.push('/');
     toast.success('با موفقیت خارج شدید');
     setTimeout(() => window.location.reload(), 3000);
   };

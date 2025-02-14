@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { FaHeart, FaHome, FaShoppingCart } from 'react-icons/fa';
 import { IoFastFood } from 'react-icons/io5';
@@ -18,6 +18,7 @@ export function Header() {
   const handleShowModalLogin = () => {
     loginToggleUrlState.show();
   };
+  const router = useRouter();
   const navItems = [
     {
       text: 'خانه',
@@ -51,6 +52,7 @@ export function Header() {
   });
   const handleLogout = () => {
     APIlogout();
+    router.push('/');
     toast.success('با موفقیت خارج شدید');
     setTimeout(() => window.location.reload(), 3000);
   };

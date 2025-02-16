@@ -4,27 +4,28 @@ import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { IoBagAdd } from 'react-icons/io5';
 import { MdEdit } from 'react-icons/md';
-import { APIgetCategories } from '@/actions/routes/global/get-categories';
+import { APIgetProducts } from '@/actions/routes/global/get-products';
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
+import { formatPrice } from '@/utils/format-price';
 
 export function List() {
-  const fetchCategories = useQuery({
-    queryKey: ['categories'],
-    queryFn: () => APIgetCategories(),
+  const fetchProducts = useQuery({
+    queryKey: ['products'],
+    queryFn: () => APIgetProducts(),
   });
 
-  if (fetchCategories.isLoading) {
+  if (fetchProducts.isLoading) {
     return <Loader />;
   }
 
-  if (fetchCategories.data?.length === 0) {
+  if (fetchProducts.data?.length === 0) {
     return <Empty text="محصولی برای نمایش وجود ندارد!" />;
   }
 
   return (
-    <section className="size-full">
-      <div className="relative flex size-full h-fit flex-col overflow-auto rounded-xl border border-gray-200 bg-white bg-clip-border text-gray-600">
+    <section className="size-full overflow-hidden">
+      <div className="overflow-x-auto rounded-xl border border-gray-200">
         <table className="w-full min-w-max table-auto text-right text-sm">
           <thead className="bg-gray-200">
             <tr>
@@ -44,6 +45,26 @@ export function List() {
                 </p>
               </th>
               <th className="border-b border-gray-200 p-4">
+                <p className="block text-sm font-medium leading-none antialiased">
+                  توضیحات
+                </p>
+              </th>
+              <th className="border-b border-gray-200 p-4">
+                <p className="block text-sm font-medium leading-none antialiased">
+                  تخفیف
+                </p>
+              </th>
+              <th className="border-b border-gray-200 p-4">
+                <p className="block text-sm font-medium leading-none antialiased">
+                  مبلغ با تخفیف
+                </p>
+              </th>
+              <th className="border-b border-gray-200 p-4">
+                <p className="block text-sm font-medium leading-none antialiased">
+                  مبلغ بدون تخفیف
+                </p>
+              </th>
+              <th className="border-b border-gray-200 p-4">
                 <button>
                   <IoBagAdd size={22} />
                 </button>
@@ -51,8 +72,8 @@ export function List() {
             </tr>
           </thead>
           <tbody>
-            {fetchCategories.data?.map((item, index) => (
-              <tr key={item._id} className="even:bg-gray-50">
+            {fetchProducts.data?.map((item, index) => (
+              <tr key={item._id} className="odd:bg-gray-50">
                 <td className="px-4 py-1">{index + 1}</td>
                 <td className="px-4 py-1 text-center">
                   <Image
@@ -64,6 +85,16 @@ export function List() {
                 </td>
                 <td className="max-w-[150px] truncate px-4 py-1 text-right">
                   {item.title}
+                </td>
+                <td className="max-w-[250px] truncate px-4 py-1 text-right">
+                  {item.description}
+                </td>
+                <td className="px-4 py-1">{item.discount}</td>
+                <td className="px-4 py-1">
+                  {formatPrice(item.priceWithDiscount)}
+                </td>
+                <td className="px-4 py-1">
+                  {formatPrice(item.priceWithoutDiscount)}
                 </td>
                 <td className="px-4 py-1 text-right">
                   <button>

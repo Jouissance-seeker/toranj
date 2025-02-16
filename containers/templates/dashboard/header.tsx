@@ -23,14 +23,14 @@ export function Header() {
       path: '/dashboard/products',
     },
     {
-      text: 'سفارشات',
-      icon: <PiShoppingBagOpenFill size={27} />,
-      path: '/dashboard/orders',
-    },
-    {
       text: 'کاربران',
       icon: <FaUsers size={27} />,
       path: '/dashboard/users',
+    },
+    {
+      text: 'سفارشات',
+      icon: <PiShoppingBagOpenFill size={27} />,
+      path: '/dashboard/orders',
     },
   ];
 

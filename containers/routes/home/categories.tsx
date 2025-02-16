@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { APIgetCategories } from '@/actions/routes/home/get-categories';
+import { APIgetCategories } from '@/actions/routes/global/get-categories';
 import { APIgetProductsByCategoryId } from '@/actions/routes/home/get-product-by-category-id';
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';

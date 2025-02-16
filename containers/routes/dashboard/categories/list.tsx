@@ -2,6 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+import { IoMdTrash } from 'react-icons/io';
 import { IoBagAdd } from 'react-icons/io5';
 import { MdEdit } from 'react-icons/md';
 import { APIgetCategories } from '@/actions/routes/global/get-categories';
@@ -28,22 +29,22 @@ export function List() {
         <table className="w-full min-w-max table-auto text-right text-sm">
           <thead className="bg-gray-200">
             <tr>
-              <th className="border-b border-gray-200 p-4">
+              <th className="border-b border-gray-200 p-3">
                 <p className="block text-sm font-medium leading-none antialiased">
                   #
                 </p>
               </th>
-              <th className="border-b border-gray-200 p-4">
+              <th className="border-b border-gray-200 p-3">
                 <p className="block text-sm font-medium leading-none antialiased">
                   تصویر
                 </p>
               </th>
-              <th className="border-b border-gray-200 p-4">
+              <th className="border-b border-gray-200 p-3">
                 <p className="block text-sm font-medium leading-none antialiased">
                   عنوان
                 </p>
               </th>
-              <th className="border-b border-gray-200 p-4">
+              <th className="border-b border-gray-200 p-3">
                 <button>
                   <IoBagAdd size={22} />
                 </button>
@@ -58,16 +59,19 @@ export function List() {
                   <Image
                     src={item.image}
                     alt={item.title}
-                    width={60}
-                    height={60}
+                    width={50}
+                    height={50}
                   />
                 </td>
                 <td className="max-w-[150px] truncate px-4 py-1 text-right">
                   {item.title}
                 </td>
                 <td className="px-4 py-1 text-right">
-                  <button>
+                  <button className="mx-2">
                     <MdEdit size={22} />
+                  </button>
+                  <button className="mx-2">
+                    <IoMdTrash size={22} />
                   </button>
                 </td>
               </tr>

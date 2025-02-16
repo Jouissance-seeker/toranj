@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
-import { IoBagAdd } from 'react-icons/io5';
+import { IoMdTrash } from 'react-icons/io';
 import { MdEdit } from 'react-icons/md';
 import { APIgetProducts } from '@/actions/routes/global/get-products';
 import { Empty } from '@/components/empty';
@@ -64,11 +64,7 @@ export function List() {
                   مبلغ بدون تخفیف
                 </p>
               </th>
-              <th className="border-b border-gray-200 p-4">
-                <button>
-                  <IoBagAdd size={22} />
-                </button>
-              </th>
+              <td className="flex gap-2 px-4 py-1 text-right" />
             </tr>
           </thead>
           <tbody>
@@ -97,8 +93,11 @@ export function List() {
                   {formatPrice(item.priceWithoutDiscount)}
                 </td>
                 <td className="px-4 py-1 text-right">
-                  <button>
+                  <button className="mx-2">
                     <MdEdit size={22} />
+                  </button>
+                  <button className="mx-2">
+                    <IoMdTrash size={22} />
                   </button>
                 </td>
               </tr>

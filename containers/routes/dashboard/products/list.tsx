@@ -2,8 +2,10 @@
 
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+import toast from 'react-hot-toast';
 import { IoMdTrash } from 'react-icons/io';
 import { MdEdit } from 'react-icons/md';
+import { APIdeleteProduct } from '@/actions/routes/dashboard/delete-product';
 import { APIgetProducts } from '@/actions/routes/global/get-products';
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
@@ -22,6 +24,20 @@ export function List() {
   if (fetchProducts.data?.length === 0) {
     return <Empty text="محصولی برای نمایش وجود ندارد!" />;
   }
+
+  const handleDeleteProduct = async (id: string) => {
+    const res = await APIdeleteProduct({
+      path: {
+        id,
+      },
+    });
+    if (res.status === 'success') {
+      fetchProducts.refetch();
+      toast.success(res.message);
+    } else {
+      toast.error(res.message);
+    }
+  };
 
   return (
     <section className="size-full overflow-hidden">
@@ -96,7 +112,10 @@ export function List() {
                   <button className="mx-2">
                     <MdEdit size={22} />
                   </button>
-                  <button className="mx-2">
+                  <button
+                    onClick={() => handleDeleteProduct(item._id)}
+                    className="mx-2"
+                  >
                     <IoMdTrash size={22} />
                   </button>
                 </td>

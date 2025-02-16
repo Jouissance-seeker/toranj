@@ -2,9 +2,11 @@
 
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+import toast from 'react-hot-toast';
 import { IoMdTrash } from 'react-icons/io';
 import { IoBagAdd } from 'react-icons/io5';
 import { MdEdit } from 'react-icons/md';
+import { APIdeleteCategory } from '@/actions/routes/dashboard/delete-categories';
 import { APIgetCategories } from '@/actions/routes/global/get-categories';
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
@@ -22,6 +24,20 @@ export function List() {
   if (fetchCategories.data?.length === 0) {
     return <Empty text="محصولی برای نمایش وجود ندارد!" />;
   }
+
+  const handleDeleteCategory = async (id: string) => {
+    const res = await APIdeleteCategory({
+      path: {
+        id,
+      },
+    });
+    if (res.status === 'success') {
+      fetchCategories.refetch();
+      toast.success(res.message);
+    } else {
+      toast.error(res.message);
+    }
+  };
 
   return (
     <section className="size-full">
@@ -70,7 +86,10 @@ export function List() {
                   <button className="mx-2">
                     <MdEdit size={22} />
                   </button>
-                  <button className="mx-2">
+                  <button
+                    onClick={() => handleDeleteCategory(item._id)}
+                    className="mx-2"
+                  >
                     <IoMdTrash size={22} />
                   </button>
                 </td>

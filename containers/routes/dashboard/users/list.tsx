@@ -1,7 +1,9 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 import { IoMdTrash } from 'react-icons/io';
+import { APIdeleteUser } from '@/actions/routes/dashboard/delete-user';
 import { APIgetUsers } from '@/actions/routes/dashboard/get-users';
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
@@ -19,6 +21,20 @@ export function List() {
   if (fetchUsers.data?.length === 0) {
     return <Empty text="محصولی برای نمایش وجود ندارد!" />;
   }
+
+  const handleDeleteUser = async (id: string) => {
+    const res = await APIdeleteUser({
+      path: {
+        id,
+      },
+    });
+    if (res.status === 'success') {
+      fetchUsers.refetch();
+      toast.success(res.message);
+    } else {
+      toast.error(res.message);
+    }
+  };
 
   return (
     <section className="size-full overflow-hidden">
@@ -75,7 +91,7 @@ export function List() {
                 <td className="px-4 py-1">{item.address}</td>
                 <td className="px-4 py-1">{item.role.toLocaleLowerCase()}</td>
                 <td className="px-4 py-1 text-right">
-                  <button>
+                  <button onClick={() => handleDeleteUser(item._id)}>
                     <IoMdTrash size={22} />
                   </button>
                 </td>

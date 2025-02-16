@@ -45,8 +45,8 @@ const Top = (props: ITopProps) => {
     queryFn: () => APIgetCategories(),
   });
 
-  if (fetchCategories.isLoading) {
-    return <Loader />;
+  if (fetchCategories.data?.length === 0) {
+    return <Empty text="دسته بندی ای برای نمایش وجود ندارد!" />;
   }
 
   return (
@@ -116,7 +116,10 @@ const Bottom = (props: IBottomProps) => {
     return <Loader />;
   }
 
-  if (fetchProductsByCategory.data?.length === 0) {
+  if (
+    fetchProductsByCategory.data?.length === 0 ||
+    fetchCategories.data?.length === 0
+  ) {
     return <Empty text="محصولی برای نمایش وجود ندارد!" />;
   }
 

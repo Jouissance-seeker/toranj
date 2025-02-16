@@ -1,3 +1,5 @@
+'use client';
+
 import { useQuery } from '@tanstack/react-query';
 import { APIgetProducts } from '@/actions/routes/explore/get-products';
 import { Empty } from '@/components/empty';

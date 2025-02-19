@@ -10,6 +10,7 @@ import { APIdeleteCategory } from '@/actions/routes/dashboard/delete-categories'
 import { APIgetCategories } from '@/actions/routes/global/get-categories';
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
+import { useToggleUrlState } from '@/hooks/toggle-url-state';
 
 export function List() {
   const fetchCategories = useQuery({
@@ -17,13 +18,10 @@ export function List() {
     queryFn: () => APIgetCategories(),
   });
 
-  if (fetchCategories.isLoading) {
-    return <Loader />;
-  }
-
-  if (fetchCategories.data?.length === 0) {
-    return <Empty text="محصولی برای نمایش وجود ندارد!" />;
-  }
+  const addCategoryToggleUrlState = useToggleUrlState('add-category');
+  const handleShowModalEditCategory = () => {
+    addCategoryToggleUrlState.show();
+  };
 
   const handleDeleteCategory = async (id: string) => {
     const res = await APIdeleteCategory({
@@ -38,6 +36,14 @@ export function List() {
       toast.error(res.message);
     }
   };
+
+  if (fetchCategories.isLoading) {
+    return <Loader />;
+  }
+
+  if (fetchCategories.data?.length === 0) {
+    return <Empty text="محصولی برای نمایش وجود ندارد!" />;
+  }
 
   return (
     <section className="size-full">
@@ -61,7 +67,7 @@ export function List() {
                 </p>
               </th>
               <th className="border-b border-gray-200 p-3">
-                <button>
+                <button onClick={handleShowModalEditCategory}>
                   <IoBagAdd size={22} />
                 </button>
               </th>

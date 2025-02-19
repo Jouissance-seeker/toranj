@@ -159,7 +159,7 @@ export function ModalRegister() {
               return (
                 <div
                   key={key}
-                  className={cn('"flex flex-col"', {
+                  className={cn('flex flex-col', {
                     'col-span-2': key === 'address',
                   })}
                 >

@@ -1,8 +1,11 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { z } from 'zod';
+import { APIaddCategory } from '@/actions/routes/dashboard/add-category';
 import { ToggleSection } from '@/components/toggle-section';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
 import { cn } from '@/utils/cn';
@@ -12,6 +15,7 @@ export function ModalAddCategory() {
   const handleCloseModalAddCategory = () => {
     editCategoryToggleUrlState.hide(['title', 'image']);
   };
+  const queryClient = useQueryClient();
 
   // form
   const formFields = {
@@ -46,7 +50,20 @@ export function ModalAddCategory() {
     },
   });
   const handleSubmitForm = async (data: any) => {
-    console.log(data);
+    const formData = new FormData();
+    formData.append('cover', data.image[0]);
+    formData.append('title', data.title);
+    const res = await APIaddCategory({ body: formData });
+    if (res.status === 'success') {
+      toast.success(res.message);
+      handleCloseModalAddCategory();
+      form.reset();
+      queryClient.refetchQueries({
+        queryKey: ['categories'],
+      });
+    } else {
+      toast.error(res.message);
+    }
   };
 
   return (

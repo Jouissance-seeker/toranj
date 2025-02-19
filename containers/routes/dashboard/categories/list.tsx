@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import { IoMdTrash } from 'react-icons/io';
 import { IoBagAdd } from 'react-icons/io5';
 import { MdEdit } from 'react-icons/md';
-import { APIdeleteCategory } from '@/actions/routes/dashboard/delete-categories';
+import { APIdeleteCategory } from '@/actions/routes/dashboard/delete-category';
 import { APIgetCategories } from '@/actions/routes/global/get-categories';
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';

@@ -11,9 +11,10 @@ import { useToggleUrlState } from '@/hooks/toggle-url-state';
 import { cn } from '@/utils/cn';
 
 export function ModalAddCategory() {
-  const editCategoryToggleUrlState = useToggleUrlState('add-category');
-  const handleCloseModalAddCategory = () => {
-    editCategoryToggleUrlState.hide(['title', 'image']);
+  const addCategoryToggleUrlState = useToggleUrlState('add-category');
+  const handleClose = () => {
+    addCategoryToggleUrlState.hide(['title', 'image']);
+    form.reset();
   };
   const queryClient = useQueryClient();
 
@@ -56,7 +57,7 @@ export function ModalAddCategory() {
     const res = await APIaddCategory({ body: formData });
     if (res.status === 'success') {
       toast.success(res.message);
-      handleCloseModalAddCategory();
+      handleClose();
       form.reset();
       queryClient.refetchQueries({
         queryKey: ['categories'],
@@ -68,9 +69,9 @@ export function ModalAddCategory() {
 
   return (
     <ToggleSection
-      isShow={editCategoryToggleUrlState.isShow}
+      isShow={addCategoryToggleUrlState.isShow}
       isBackDrop
-      onClose={handleCloseModalAddCategory}
+      onClose={handleClose}
       className="fixed left-1/2 top-1/2 w-[350px] -translate-x-1/2 -translate-y-1/2 sm:w-[500px]"
     >
       <div className="flex flex-col rounded-lg bg-white">
@@ -90,7 +91,7 @@ export function ModalAddCategory() {
                   <label htmlFor={key} className="mb-1 text-sm text-teal">
                     {field.label}
                   </label>
-                  {key === 'image' ? (
+                  {key === 'image' && (
                     <div className="relative">
                       <input
                         id={key}
@@ -105,7 +106,8 @@ export function ModalAddCategory() {
                         <div className="pointer-events-none absolute right-2 top-1/2 h-10 w-36 -translate-y-1/2 bg-gray text-sm text-gray-400" />
                       )}
                     </div>
-                  ) : (
+                  )}
+                  {key === 'title' && (
                     <input
                       id={key}
                       type={field.type}
@@ -115,9 +117,7 @@ export function ModalAddCategory() {
                       className={cn({ 'border-red-500': !!error })}
                     />
                   )}
-                  {error ? (
-                    <p className="mt-1 text-xs text-red-500">{error}</p>
-                  ) : null}
+                  <p className="mt-1 text-xs text-red-500">{error}</p>
                 </div>
               );
             })}

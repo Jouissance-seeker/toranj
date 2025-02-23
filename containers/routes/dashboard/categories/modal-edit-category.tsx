@@ -2,18 +2,21 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
+import { useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
-import { APIaddCategory } from '@/actions/routes/dashboard/categories/add-category';
+import { APIeditCategory } from '@/actions/routes/dashboard/categories/edit-category';
 import { Feild } from '@/components/feild';
 import { ToggleSection } from '@/components/toggle-section';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
 
 export function ModalEditCategory() {
+  const searchParams = useSearchParams();
   const editCategoryToggleUrlState = useToggleUrlState('edit-category');
   const handleClose = () => {
-    editCategoryToggleUrlState.hide(['title', 'image']);
+    editCategoryToggleUrlState.hide(['title', 'image', 'id']);
     form.reset();
   };
   const queryClient = useQueryClient();
@@ -54,7 +57,10 @@ export function ModalEditCategory() {
     const formData = new FormData();
     formData.append('cover', data.image[0]);
     formData.append('title', data.title);
-    const res = await APIaddCategory({ body: formData });
+    const res = await APIeditCategory({
+      path: String(searchParams.get('id')),
+      body: formData,
+    });
     if (res.status === 'success') {
       toast.success(res.message);
       handleClose();
@@ -66,6 +72,16 @@ export function ModalEditCategory() {
       toast.error(res.message);
     }
   };
+
+  // auto fill form
+  useEffect(() => {
+    if (editCategoryToggleUrlState.isShow) {
+      form.reset({
+        image: null,
+        title: String(searchParams.get('title')),
+      });
+    }
+  }, [editCategoryToggleUrlState.isShow]);
 
   return (
     <ToggleSection
@@ -90,7 +106,7 @@ export function ModalEditCategory() {
             type="submit"
             className="rounded-lg bg-teal p-4 text-white transition-all"
           >
-            افزودن
+            ذخیره
           </button>
         </form>
       </div>

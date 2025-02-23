@@ -17,12 +17,18 @@ export function List() {
     queryKey: ['categories'],
     queryFn: () => APIgetCategories(),
   });
-
   const addCategoryToggleUrlState = useToggleUrlState('add-category');
-  const handleShowModalEditCategory = () => {
+  const handleShowModalAddCategory = () => {
     addCategoryToggleUrlState.show();
   };
-
+  const editCategoryToggleUrlState = useToggleUrlState('edit-category');
+  const handleShowModalEditCategory = (data: any) => {
+    editCategoryToggleUrlState.show({
+      title: data.title,
+      image: data.image,
+      id: data.id,
+    });
+  };
   const handleDeleteCategory = async (id: string) => {
     const res = await APIdeleteCategory({
       path: {
@@ -67,7 +73,7 @@ export function List() {
                 </p>
               </th>
               <th className="border-b border-gray-200 p-3">
-                <button onClick={handleShowModalEditCategory}>
+                <button onClick={handleShowModalAddCategory}>
                   <IoBagAdd size={22} />
                 </button>
               </th>
@@ -89,7 +95,16 @@ export function List() {
                   {item.title}
                 </td>
                 <td className="px-4 py-1 text-right">
-                  <button className="mx-2">
+                  <button
+                    onClick={() =>
+                      handleShowModalEditCategory({
+                        title: item.title,
+                        image: item.image,
+                        id: item._id,
+                      })
+                    }
+                    className="mx-2"
+                  >
                     <MdEdit size={22} />
                   </button>
                   <button

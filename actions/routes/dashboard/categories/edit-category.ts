@@ -3,6 +3,7 @@
 import { fetcher } from '@/utils/fetcher';
 
 interface IParams {
+  path: string;
   body: FormData;
 }
 
@@ -11,10 +12,10 @@ type TReturn = Promise<{
   status: 'success' | 'fail';
 }>;
 
-export async function APIaddCategory(params: IParams): TReturn {
+export async function APIeditCategory(params: IParams): TReturn {
   const res = await fetcher({
-    endpoint: `/categories/add`,
-    method: 'post',
+    endpoint: `/categories/${params.path}/edit`,
+    method: 'put',
     contentType: 'form-data',
     body: params.body,
   });

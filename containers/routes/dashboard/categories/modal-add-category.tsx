@@ -13,7 +13,7 @@ import { useToggleUrlState } from '@/hooks/toggle-url-state';
 export function ModalAddCategory() {
   const addCategoryToggleUrlState = useToggleUrlState('add-category');
   const handleClose = () => {
-    addCategoryToggleUrlState.hide(['title', 'image']);
+    addCategoryToggleUrlState.hide();
     form.reset();
   };
   const queryClient = useQueryClient();

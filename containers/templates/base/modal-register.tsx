@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
 import { APIregister } from '@/actions/templates/base/register';
+import { Feild } from '@/components/feild';
 import { ToggleSection } from '@/components/toggle-section';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
-import { cn } from '@/utils/cn';
 
 export function ModalRegister() {
   const loginToggleUrlState = useToggleUrlState('login');
@@ -151,33 +151,9 @@ export function ModalRegister() {
         >
           {/* fields */}
           <div className="mb-4 mt-2 grid grid-cols-2 gap-2">
-            {Object.entries(formFields).map(([key, field]) => {
-              const error =
-                form.formState.errors[
-                  key as keyof z.infer<typeof formSchema>
-                ]?.message?.toString();
-              return (
-                <div
-                  key={key}
-                  className={cn('flex flex-col', {
-                    'col-span-2': key === 'address',
-                  })}
-                >
-                  <label htmlFor={key} className="mb-1 text-sm text-teal">
-                    {field.label}
-                  </label>
-                  <input
-                    id={key}
-                    type={field.type}
-                    {...form.register(key as keyof z.infer<typeof formSchema>)}
-                    className={cn({ 'border-red-500': !!error })}
-                  />
-                  {error ? (
-                    <p className="mt-1 text-xs text-red-500">{error}</p>
-                  ) : null}
-                </div>
-              );
-            })}
+            {Object.entries(formFields).map(([key, field]) => (
+              <Feild name={key} key={key} field={field} form={form} />
+            ))}
           </div>
           {/* submit */}
           <button

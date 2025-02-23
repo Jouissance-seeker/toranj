@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import { z } from 'zod';
 import { APIupdateAuth } from '@/actions/routes/profile/update-auth';
 import { APIgetAuth } from '@/actions/templates/base/get-auth';
-import { cn } from '@/utils/cn';
+import { Feild } from '@/components/feild';
 
 export function EditForm() {
   // form
@@ -117,28 +117,9 @@ export function EditForm() {
       >
         {/* fields */}
         <div className="mb-4 mt-2 grid gap-2">
-          {Object.entries(formFields).map(([key, field]) => {
-            const error =
-              form.formState.errors[
-                key as keyof z.infer<typeof formSchema>
-              ]?.message?.toString();
-            return (
-              <div key={key} className="flex flex-col">
-                <label htmlFor={key} className="mb-1 text-sm text-teal">
-                  {field.label}
-                </label>
-                <input
-                  id={key}
-                  type={field.type}
-                  {...form.register(key as keyof z.infer<typeof formSchema>)}
-                  className={cn({ 'border-red-500': !!error })}
-                />
-                {error ? (
-                  <p className="mt-1 text-xs text-red-500">{error}</p>
-                ) : null}
-              </div>
-            );
-          })}
+          {Object.entries(formFields).map(([key, field]) => (
+            <Feild name={key} key={key} field={field} form={form} />
+          ))}
         </div>
         {/* submit */}
         <button type="submit" className="rounded-lg bg-teal p-4 text-white">

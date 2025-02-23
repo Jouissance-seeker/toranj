@@ -6,9 +6,9 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
 import { APIaddCategory } from '@/actions/routes/dashboard/add-category';
+import { Feild } from '@/components/feild';
 import { ToggleSection } from '@/components/toggle-section';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
-import { cn } from '@/utils/cn';
 
 export function ModalAddCategory() {
   const addCategoryToggleUrlState = useToggleUrlState('add-category');
@@ -21,7 +21,7 @@ export function ModalAddCategory() {
   // form
   const formFields = {
     image: {
-      type: 'file',
+      type: 'image',
       label: 'تصویر',
       errors: {
         isRequired: 'این فیلد اجباری است!',
@@ -81,46 +81,9 @@ export function ModalAddCategory() {
         >
           {/* fields */}
           <div className="mb-4 mt-2 flex flex-col gap-2">
-            {Object.entries(formFields).map(([key, field]) => {
-              const error =
-                form.formState.errors[
-                  key as keyof z.infer<typeof formSchema>
-                ]?.message?.toString();
-              return (
-                <div key={key} className={cn('flex flex-col')}>
-                  <label htmlFor={key} className="mb-1 text-sm text-teal">
-                    {field.label}
-                  </label>
-                  {key === 'image' && (
-                    <div className="relative">
-                      <input
-                        id={key}
-                        type={field.type}
-                        {...form.register(
-                          key as keyof z.infer<typeof formSchema>,
-                        )}
-                        className={cn({ 'border-red-500': !!error })}
-                        accept="image/*"
-                      />
-                      {!form.watch('image') && (
-                        <div className="pointer-events-none absolute right-2 top-1/2 h-10 w-36 -translate-y-1/2 bg-gray text-sm text-gray-400" />
-                      )}
-                    </div>
-                  )}
-                  {key === 'title' && (
-                    <input
-                      id={key}
-                      type={field.type}
-                      {...form.register(
-                        key as keyof z.infer<typeof formSchema>,
-                      )}
-                      className={cn({ 'border-red-500': !!error })}
-                    />
-                  )}
-                  <p className="mt-1 text-xs text-red-500">{error}</p>
-                </div>
-              );
-            })}
+            {Object.entries(formFields).map(([key, field]) => (
+              <Feild name={key} key={key} field={field} form={form} />
+            ))}
           </div>
           {/* submit */}
           <button

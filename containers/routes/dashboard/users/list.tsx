@@ -74,7 +74,7 @@ export function List() {
               </th>
               <th className="border-b border-gray-200 p-4">
                 <p className="block text-sm font-medium leading-none antialiased">
-                  سطح دستزسی
+                  سطح دسترسی
                 </p>
               </th>
               <th className="border-b border-gray-200 p-4" />

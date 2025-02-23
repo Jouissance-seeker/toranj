@@ -3,8 +3,8 @@
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { IoMdTrash } from 'react-icons/io';
-import { APIdeleteUser } from '@/actions/routes/dashboard/delete-user';
-import { APIgetUsers } from '@/actions/routes/dashboard/get-users';
+import { APIdeleteUser } from '@/actions/routes/dashboard/users/delete-user';
+import { APIgetUsers } from '@/actions/routes/dashboard/users/get-users';
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
 

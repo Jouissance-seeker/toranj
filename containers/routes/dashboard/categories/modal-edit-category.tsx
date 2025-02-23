@@ -10,10 +10,10 @@ import { Feild } from '@/components/feild';
 import { ToggleSection } from '@/components/toggle-section';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
 
-export function ModalAddCategory() {
-  const addCategoryToggleUrlState = useToggleUrlState('add-category');
+export function ModalEditCategory() {
+  const editCategoryToggleUrlState = useToggleUrlState('edit-category');
   const handleClose = () => {
-    addCategoryToggleUrlState.hide(['title', 'image']);
+    editCategoryToggleUrlState.hide(['title', 'image']);
     form.reset();
   };
   const queryClient = useQueryClient();
@@ -69,7 +69,7 @@ export function ModalAddCategory() {
 
   return (
     <ToggleSection
-      isShow={addCategoryToggleUrlState.isShow}
+      isShow={editCategoryToggleUrlState.isShow}
       isBackDrop
       onClose={handleClose}
       className="fixed left-1/2 top-1/2 w-[350px] -translate-x-1/2 -translate-y-1/2 sm:w-[500px]"

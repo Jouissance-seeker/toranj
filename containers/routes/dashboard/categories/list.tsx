@@ -47,10 +47,6 @@ export function List() {
     return <Loader />;
   }
 
-  if (fetchCategories.data?.length === 0) {
-    return <Empty text="محصولی برای نمایش وجود ندارد!" />;
-  }
-
   return (
     <section className="size-full">
       <div className="relative flex size-full h-fit flex-col overflow-auto rounded-xl border border-gray-200 bg-white bg-clip-border text-gray-600">
@@ -80,42 +76,50 @@ export function List() {
             </tr>
           </thead>
           <tbody>
-            {fetchCategories.data?.map((item, index) => (
-              <tr key={item._id} className="even:bg-gray-50">
-                <td className="px-4 py-1">{index + 1}</td>
-                <td className="px-4 py-1 text-center">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={50}
-                    height={50}
-                  />
-                </td>
-                <td className="max-w-[150px] truncate px-4 py-1 text-right">
-                  {item.title}
-                </td>
-                <td className="px-4 py-1 text-right">
-                  <button
-                    onClick={() =>
-                      handleShowModalEditCategory({
-                        title: item.title,
-                        image: item.image,
-                        id: item._id,
-                      })
-                    }
-                    className="mx-2"
-                  >
-                    <MdEdit size={22} />
-                  </button>
-                  <button
-                    onClick={() => handleDeleteCategory(item._id)}
-                    className="mx-2"
-                  >
-                    <IoMdTrash size={22} />
-                  </button>
+            {fetchCategories.data?.length === 0 ? (
+              <tr>
+                <td colSpan={8} className="p-4">
+                  <Empty text="محصولی برای نمایش وجود ندارد!" />
                 </td>
               </tr>
-            ))}
+            ) : (
+              fetchCategories.data?.map((item, index) => (
+                <tr key={item._id} className="even:bg-gray-50">
+                  <td className="px-4 py-1">{index + 1}</td>
+                  <td className="px-4 py-1 text-center">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      width={50}
+                      height={50}
+                    />
+                  </td>
+                  <td className="max-w-[150px] truncate px-4 py-1 text-right">
+                    {item.title}
+                  </td>
+                  <td className="px-4 py-1 text-right">
+                    <button
+                      onClick={() =>
+                        handleShowModalEditCategory({
+                          title: item.title,
+                          image: item.image,
+                          id: item._id,
+                        })
+                      }
+                      className="mx-2"
+                    >
+                      <MdEdit size={22} />
+                    </button>
+                    <button
+                      onClick={() => handleDeleteCategory(item._id)}
+                      className="mx-2"
+                    >
+                      <IoMdTrash size={22} />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

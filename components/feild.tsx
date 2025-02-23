@@ -27,14 +27,14 @@ export function Feild(props: IFeildProps) {
           )}
         </div>
       )}
-      {props.field.type === 'text' && (
+      {(props.field.type === 'text' || props.field.type === 'number') && (
         <input
           type={props.field.type}
           {...props.form.register(props.name)}
           className={cn({ 'border-red-500': !!error })}
         />
       )}
-      <p className="mt-1 text-xs text-red-500">{error}</p>
+      {!!error && <p className="mt-1 text-xs text-red-500">{error}</p>}
     </div>
   );
 }

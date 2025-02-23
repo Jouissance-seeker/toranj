@@ -2,21 +2,18 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import { useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
-import { APIeditCategory } from '@/actions/routes/dashboard/categories/edit-category';
+import { APIaddCategory } from '@/actions/routes/dashboard/categories/add-category';
 import { Feild } from '@/components/feild';
 import { ToggleSection } from '@/components/toggle-section';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
 
-export function ModalEditCategory() {
-  const searchParams = useSearchParams();
-  const editCategoryToggleUrlState = useToggleUrlState('edit-category');
+export function ModalAddProduct() {
+  const addProductToggleUrlState = useToggleUrlState('add-product');
   const handleClose = () => {
-    editCategoryToggleUrlState.hide(['title', 'image', 'id']);
+    addProductToggleUrlState.hide();
     form.reset();
   };
   const queryClient = useQueryClient();
@@ -26,6 +23,27 @@ export function ModalEditCategory() {
     title: {
       type: 'text',
       label: 'عنوان',
+      errors: {
+        isRequired: 'این فیلد اجباری است!',
+      },
+    },
+    description: {
+      type: 'text',
+      label: 'توضیحات',
+      errors: {
+        isRequired: 'این فیلد اجباری است!',
+      },
+    },
+    priceWithoutDiscount: {
+      type: 'number',
+      label: 'مبلغ بدون تحفیف',
+      errors: {
+        isRequired: 'این فیلد اجباری است!',
+      },
+    },
+    priceWithDiscount: {
+      type: 'number',
+      label: 'مبلغ با تحفیف',
       errors: {
         isRequired: 'این فیلد اجباری است!',
       },
@@ -57,35 +75,22 @@ export function ModalEditCategory() {
     const formData = new FormData();
     formData.append('cover', data.image[0]);
     formData.append('title', data.title);
-    const res = await APIeditCategory({
-      path: String(searchParams.get('id')),
-      body: formData,
-    });
+    const res = await APIaddCategory({ body: formData });
     if (res.status === 'success') {
       toast.success(res.message);
       handleClose();
       form.reset();
       queryClient.refetchQueries({
-        queryKey: ['categories'],
+        queryKey: ['products'],
       });
     } else {
       toast.error(res.message);
     }
   };
 
-  // auto fill form
-  useEffect(() => {
-    if (editCategoryToggleUrlState.isShow) {
-      form.reset({
-        image: null,
-        title: String(searchParams.get('title')),
-      });
-    }
-  }, [editCategoryToggleUrlState.isShow]);
-
   return (
     <ToggleSection
-      isShow={editCategoryToggleUrlState.isShow}
+      isShow={addProductToggleUrlState.isShow}
       isBackDrop
       onClose={handleClose}
       className="fixed left-1/2 top-1/2 w-[350px] -translate-x-1/2 -translate-y-1/2 sm:w-[500px]"
@@ -106,7 +111,7 @@ export function ModalEditCategory() {
             type="submit"
             className="rounded-lg bg-teal p-4 text-white transition-all"
           >
-            ذخیره
+            افزودن
           </button>
         </form>
       </div>

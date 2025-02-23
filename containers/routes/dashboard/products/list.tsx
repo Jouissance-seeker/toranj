@@ -10,6 +10,7 @@ import { APIdeleteProduct } from '@/actions/routes/dashboard/products/delete-pro
 import { APIgetProducts } from '@/actions/routes/dashboard/products/get-products';
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
+import { useToggleUrlState } from '@/hooks/toggle-url-state';
 import { formatPrice } from '@/utils/format-price';
 
 export function List() {
@@ -17,13 +18,13 @@ export function List() {
     queryKey: ['products'],
     queryFn: () => APIgetProducts(),
   });
+  const addProductToggleUrlState = useToggleUrlState('add-product');
+  const handleShowModalAddProduct = () => {
+    addProductToggleUrlState.show();
+  };
 
   if (fetchProducts.isLoading) {
     return <Loader />;
-  }
-
-  if (fetchProducts.data?.length === 0) {
-    return <Empty text="محصولی برای نمایش وجود ندارد!" />;
   }
 
   const handleDeleteProduct = async (id: string) => {
@@ -68,11 +69,6 @@ export function List() {
               </th>
               <th className="border-b border-gray-200 p-4">
                 <p className="block text-sm font-medium leading-none antialiased">
-                  تخفیف
-                </p>
-              </th>
-              <th className="border-b border-gray-200 p-4">
-                <p className="block text-sm font-medium leading-none antialiased">
                   مبلغ با تخفیف
                 </p>
               </th>
@@ -82,50 +78,57 @@ export function List() {
                 </p>
               </th>
               <th className="border-b border-gray-200 p-3">
-                <button>
+                <button onClick={handleShowModalAddProduct}>
                   <IoBagAdd size={22} />
                 </button>
               </th>
             </tr>
           </thead>
           <tbody>
-            {fetchProducts.data?.map((item, index) => (
-              <tr key={item._id} className="odd:bg-gray-50">
-                <td className="px-4 py-1">{index + 1}</td>
-                <td className="px-4 py-1 text-center">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={60}
-                    height={60}
-                  />
-                </td>
-                <td className="max-w-[150px] truncate px-4 py-1 text-right">
-                  {item.title}
-                </td>
-                <td className="max-w-[200px] truncate px-4 py-1 text-right">
-                  {item.description}
-                </td>
-                <td className="px-4 py-1">{item.discount}</td>
-                <td className="px-4 py-1">
-                  {formatPrice(item.priceWithDiscount)}
-                </td>
-                <td className="px-4 py-1">
-                  {formatPrice(item.priceWithoutDiscount)}
-                </td>
-                <td className="px-4 py-1 text-right">
-                  <button className="mx-2">
-                    <MdEdit size={22} />
-                  </button>
-                  <button
-                    onClick={() => handleDeleteProduct(item._id)}
-                    className="mx-2"
-                  >
-                    <IoMdTrash size={22} />
-                  </button>
+            {fetchProducts.data?.length === 0 ? (
+              <tr>
+                <td colSpan={8} className="p-4">
+                  <Empty text="محصولی برای نمایش وجود ندارد!" />
                 </td>
               </tr>
-            ))}
+            ) : (
+              fetchProducts.data?.map((item, index) => (
+                <tr key={item._id} className="odd:bg-gray-50">
+                  <td className="px-4 py-1">{index + 1}</td>
+                  <td className="px-4 py-1 text-center">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      width={60}
+                      height={60}
+                    />
+                  </td>
+                  <td className="max-w-[150px] truncate px-4 py-1 text-right">
+                    {item.title}
+                  </td>
+                  <td className="max-w-[200px] truncate px-4 py-1 text-right">
+                    {item.description}
+                  </td>
+                  <td className="px-4 py-1">
+                    {formatPrice(item.priceWithDiscount)}
+                  </td>
+                  <td className="px-4 py-1">
+                    {formatPrice(item.priceWithoutDiscount)}
+                  </td>
+                  <td className="px-4 py-1 text-right">
+                    <button className="mx-2">
+                      <MdEdit size={22} />
+                    </button>
+                    <button
+                      onClick={() => handleDeleteProduct(item._id)}
+                      className="mx-2"
+                    >
+                      <IoMdTrash size={22} />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

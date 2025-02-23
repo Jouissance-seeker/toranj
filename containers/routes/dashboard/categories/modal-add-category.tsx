@@ -20,16 +20,16 @@ export function ModalAddCategory() {
 
   // form
   const formFields = {
-    image: {
-      type: 'image',
-      label: 'تصویر',
+    title: {
+      type: 'text',
+      label: 'عنوان',
       errors: {
         isRequired: 'این فیلد اجباری است!',
       },
     },
-    title: {
-      type: 'text',
-      label: 'عنوان',
+    image: {
+      type: 'image',
+      label: 'تصویر',
       errors: {
         isRequired: 'این فیلد اجباری است!',
       },

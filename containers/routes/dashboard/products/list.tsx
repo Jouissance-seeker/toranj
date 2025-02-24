@@ -22,6 +22,17 @@ export function List() {
   const handleShowModalAddProduct = () => {
     addProductToggleUrlState.show();
   };
+  const editProductToggleUrlState = useToggleUrlState('edit-product');
+  const handleShowModalEditProduct = (data: any) => {
+    editProductToggleUrlState.show({
+      title: data.title,
+      description: data.description,
+      priceWithDiscount: data.priceWithDiscount,
+      priceWithoutDiscount: data.priceWithoutDiscount,
+      category: data.category,
+      id: data.id,
+    });
+  };
 
   if (fetchProducts.isLoading) {
     return <Loader />;
@@ -116,7 +127,19 @@ export function List() {
                     {formatPrice(item.priceWithoutDiscount)}
                   </td>
                   <td className="px-4 py-1 text-right">
-                    <button className="mx-2">
+                    <button
+                      onClick={() =>
+                        handleShowModalEditProduct({
+                          title: item.title,
+                          description: item.description,
+                          priceWithDiscount: item.priceWithDiscount,
+                          priceWithoutDiscount: item.priceWithoutDiscount,
+                          category: item.categoryID,
+                          id: item._id,
+                        })
+                      }
+                      className="mx-2"
+                    >
                       <MdEdit size={22} />
                     </button>
                     <button

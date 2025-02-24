@@ -2,20 +2,30 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
-import { APIaddProduct } from '@/actions/routes/dashboard/products/add-product';
+import { APIeditProduct } from '@/actions/routes/dashboard/products/edit-product';
 import { APIgetCategories } from '@/actions/routes/global/get-categories';
 import { Feild } from '@/components/feild';
 import { ToggleSection } from '@/components/toggle-section';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
 
-export function ModalAddProduct() {
-  const addProductToggleUrlState = useToggleUrlState('add-product');
+export function ModalEditProduct() {
+  const editProductToggleUrlState = useToggleUrlState('edit-product');
   const queryClient = useQueryClient();
+  const searchParams = useSearchParams();
   const handleClose = () => {
-    addProductToggleUrlState.hide();
+    editProductToggleUrlState.hide([
+      'title',
+      'description',
+      'id',
+      'category',
+      'priceWithoutDiscount',
+      'priceWithDiscount',
+    ]);
     form.reset();
   };
 
@@ -104,16 +114,17 @@ export function ModalAddProduct() {
     formData.append('priceWithDiscount', data.priceWithDiscount);
     formData.append('categoryID', data.category);
     formData.append('image', data.image[0]);
-    const res = await APIaddProduct({
+    const res = await APIeditProduct({
+      path: String(searchParams.get('id')),
       body: formData,
     });
     if (res.status === 'success') {
       toast.success(res.message);
+      handleClose();
       form.reset();
       queryClient.refetchQueries({
         queryKey: ['products'],
       });
-      handleClose();
     } else {
       toast.error(res.message);
     }
@@ -131,9 +142,23 @@ export function ModalAddProduct() {
     }));
   }
 
+  // auto fill form
+  useEffect(() => {
+    if (editProductToggleUrlState.isShow) {
+      form.reset({
+        image: null,
+        title: String(searchParams.get('title')),
+        description: String(searchParams.get('description')),
+        priceWithoutDiscount: String(searchParams.get('priceWithoutDiscount')),
+        priceWithDiscount: String(searchParams.get('priceWithDiscount')),
+        category: String(searchParams.get('category')),
+      });
+    }
+  }, [editProductToggleUrlState.isShow]);
+
   return (
     <ToggleSection
-      isShow={addProductToggleUrlState.isShow}
+      isShow={editProductToggleUrlState.isShow}
       isBackDrop
       onClose={handleClose}
       className="fixed left-1/2 top-1/2 w-[350px] -translate-x-1/2 -translate-y-1/2 sm:w-[500px]"
@@ -154,7 +179,7 @@ export function ModalAddProduct() {
             type="submit"
             className="rounded-lg bg-teal p-4 text-white transition-all"
           >
-            افزودن
+            ذخیره
           </button>
         </form>
       </div>

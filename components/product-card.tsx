@@ -54,8 +54,10 @@ export function ProductCard({ data }: IProductCardProps) {
       <div className="flex gap-5">
         <Image src={data.image} alt={data.title} width={100} height={100} />
         <div className="flex flex-col gap-2">
-          <p className="text-lg font-bold">{data.title}</p>
-          <p className="line-clamp-3 pl-8 text-sm text-gray-500">
+          <p className="max-w-[150px] truncate text-lg font-bold">
+            {data.title}
+          </p>
+          <p className="line-clamp-3 max-w-[200px] truncate pl-8 text-sm text-gray-500">
             {data.description}
           </p>
         </div>

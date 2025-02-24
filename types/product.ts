@@ -6,4 +6,5 @@ export type TProduct = {
   image: string;
   priceWithoutDiscount: number;
   priceWithDiscount: number;
+  categoryID: string;
 };

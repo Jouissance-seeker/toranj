@@ -16,7 +16,7 @@ export function ModalEditCategory() {
   const searchParams = useSearchParams();
   const editCategoryToggleUrlState = useToggleUrlState('edit-category');
   const handleClose = () => {
-    editCategoryToggleUrlState.hide(['title', 'image', 'id']);
+    editCategoryToggleUrlState.hide(['title', 'id']);
     form.reset();
   };
   const queryClient = useQueryClient();
@@ -63,11 +63,11 @@ export function ModalEditCategory() {
     });
     if (res.status === 'success') {
       toast.success(res.message);
-      handleClose();
       form.reset();
       queryClient.refetchQueries({
         queryKey: ['categories'],
       });
+      handleClose();
     } else {
       toast.error(res.message);
     }

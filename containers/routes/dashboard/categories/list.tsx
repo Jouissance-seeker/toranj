@@ -25,7 +25,6 @@ export function List() {
   const handleShowModalEditCategory = (data: any) => {
     editCategoryToggleUrlState.show({
       title: data.title,
-      image: data.image,
       id: data.id,
     });
   };

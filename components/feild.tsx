@@ -49,7 +49,8 @@ export function Feild(props: IFeildProps) {
       )}
       {(props.field.type === 'text' ||
         props.field.type === 'number' ||
-        props.field.type === 'password') && (
+        props.field.type === 'password' ||
+        props.field.type === 'email') && (
         <input
           type={props.field.type}
           {...props.form.register(props.name)}

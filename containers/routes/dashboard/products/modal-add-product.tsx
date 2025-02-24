@@ -1,22 +1,23 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
-import { APIaddCategory } from '@/actions/routes/dashboard/categories/add-category';
+import { APIaddProduct } from '@/actions/routes/dashboard/products/add-product';
+import { APIgetCategories } from '@/actions/routes/global/get-categories';
 import { Feild } from '@/components/feild';
 import { ToggleSection } from '@/components/toggle-section';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
 
 export function ModalAddProduct() {
   const addProductToggleUrlState = useToggleUrlState('add-product');
+  const queryClient = useQueryClient();
   const handleClose = () => {
     addProductToggleUrlState.hide();
     form.reset();
   };
-  const queryClient = useQueryClient();
 
   // form
   const formFields = {
@@ -55,6 +56,14 @@ export function ModalAddProduct() {
         isRequired: 'این فیلد اجباری است!',
       },
     },
+    category: {
+      type: 'select',
+      label: 'دسته بندی',
+      data: [] as any,
+      errors: {
+        isRequired: 'این فیلد اجباری است!',
+      },
+    },
   };
   const formSchema = z.object({
     image: z.any().refine((file) => file?.length > 0, {
@@ -63,19 +72,41 @@ export function ModalAddProduct() {
     title: z.string().min(1, {
       message: formFields.title.errors.isRequired,
     }),
+    description: z.string().min(1, {
+      message: formFields.description.errors.isRequired,
+    }),
+    priceWithoutDiscount: z.string().min(1, {
+      message: formFields.priceWithoutDiscount.errors.isRequired,
+    }),
+    priceWithDiscount: z.string().min(1, {
+      message: formFields.priceWithDiscount.errors.isRequired,
+    }),
+    category: z.string().min(1, {
+      message: formFields.category.errors.isRequired,
+    }),
   });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       image: null,
       title: '',
+      description: '',
+      priceWithoutDiscount: '',
+      priceWithDiscount: '',
+      category: '',
     },
   });
   const handleSubmitForm = async (data: any) => {
     const formData = new FormData();
-    formData.append('cover', data.image[0]);
     formData.append('title', data.title);
-    const res = await APIaddCategory({ body: formData });
+    formData.append('description', data.description);
+    formData.append('priceWithoutDiscount', data.priceWithoutDiscount);
+    formData.append('priceWithDiscount', data.priceWithDiscount);
+    formData.append('categoryID', data.category);
+    formData.append('image', data.image[0]);
+    const res = await APIaddProduct({
+      body: formData,
+    });
     if (res.status === 'success') {
       toast.success(res.message);
       handleClose();
@@ -87,6 +118,18 @@ export function ModalAddProduct() {
       toast.error(res.message);
     }
   };
+
+  // fetch categories and set data category field
+  const fetchCategories = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => APIgetCategories(),
+  });
+  if (fetchCategories.isSuccess) {
+    formFields.category.data = fetchCategories.data?.map((item) => ({
+      key: item.title,
+      value: item._id,
+    }));
+  }
 
   return (
     <ToggleSection

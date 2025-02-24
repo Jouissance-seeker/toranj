@@ -27,7 +27,29 @@ export function Feild(props: IFeildProps) {
           )}
         </div>
       )}
-      {(props.field.type === 'text' || props.field.type === 'number') && (
+      {props.field.type === 'select' && (
+        <select
+          {...props.form.register(props.name)}
+          className={cn(
+            'p-3 focus:outline-none border rounded-lg bg-gray text-sm',
+            {
+              'border-red-500': !!error,
+            },
+          )}
+        >
+          <option value="" disabled>
+            انتخاب کنید
+          </option>
+          {props.field.data.map((item: any) => (
+            <option key={item.key} value={item.value}>
+              {item.key}
+            </option>
+          ))}
+        </select>
+      )}
+      {(props.field.type === 'text' ||
+        props.field.type === 'number' ||
+        props.field.type === 'password') && (
         <input
           type={props.field.type}
           {...props.form.register(props.name)}

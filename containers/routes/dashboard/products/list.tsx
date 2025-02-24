@@ -7,7 +7,7 @@ import { IoMdTrash } from 'react-icons/io';
 import { IoBagAdd } from 'react-icons/io5';
 import { MdEdit } from 'react-icons/md';
 import { APIdeleteProduct } from '@/actions/routes/dashboard/products/delete-product';
-import { APIgetProducts } from '@/actions/routes/dashboard/products/get-products';
+import { APIgetProducts } from '@/actions/routes/global/get-products';
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';

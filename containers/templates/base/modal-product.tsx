@@ -21,6 +21,7 @@ export function ModalProduct() {
     discount: Number(searchParams.get('discount')) || 0,
     priceWithoutDiscount: Number(searchParams.get('priceWithoutDiscount')) || 0,
     priceWithDiscount: Number(searchParams.get('priceWithDiscount')) || 0,
+    categoryID: searchParams.get('category') || '',
   };
   const localstorageCart = useKillua(cartSlice);
   const handleAddToCart = () => localstorageCart.reducers.add(data);

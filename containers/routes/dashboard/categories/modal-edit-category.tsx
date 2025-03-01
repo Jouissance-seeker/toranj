@@ -62,11 +62,11 @@ export function ModalEditCategory() {
       body: formData,
     });
     if (res.status === 'success') {
-      toast.success(res.message);
-      form.reset();
-      queryClient.refetchQueries({
+      await queryClient.refetchQueries({
         queryKey: ['categories'],
       });
+      toast.success(res.message);
+      form.reset();
       handleClose();
     } else {
       toast.error(res.message);

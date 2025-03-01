@@ -15,10 +15,11 @@ type TReturn = Promise<{
 export async function APIeditProduct(params: IParams): TReturn {
   const res = await fetcher({
     endpoint: `/products/${params.path}/edit`,
-    method: 'post',
+    method: 'patch',
     contentType: 'form-data',
     body: params.body,
   });
+
   return {
     message: res.message,
     status: res.status,

@@ -119,12 +119,12 @@ export function ModalEditProduct() {
       body: formData,
     });
     if (res.status === 'success') {
+      await queryClient.refetchQueries({
+        queryKey: ['products'],
+      });
       toast.success(res.message);
       handleClose();
       form.reset();
-      queryClient.refetchQueries({
-        queryKey: ['products'],
-      });
     } else {
       toast.error(res.message);
     }

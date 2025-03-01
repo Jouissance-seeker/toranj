@@ -56,12 +56,12 @@ export function ModalAddCategory() {
     formData.append('title', data.title);
     const res = await APIaddCategory({ body: formData });
     if (res.status === 'success') {
-      toast.success(res.message);
-      handleClose();
-      form.reset();
-      queryClient.refetchQueries({
+      await queryClient.refetchQueries({
         queryKey: ['categories'],
       });
+      toast.success(res.message);
+      form.reset();
+      handleClose();
     } else {
       toast.error(res.message);
     }

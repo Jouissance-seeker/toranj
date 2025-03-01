@@ -3,7 +3,9 @@ export type TProduct = {
   title: string;
   description: string;
   discount: number;
-  image: string;
+  image: {
+    path: string;
+  };
   priceWithoutDiscount: number;
   priceWithDiscount: number;
   categoryID: string;

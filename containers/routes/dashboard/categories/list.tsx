@@ -87,7 +87,7 @@ export function List() {
                   <td className="px-4 py-1">{index + 1}</td>
                   <td className="px-4 py-1 text-center">
                     <Image
-                      src={item.image}
+                      src={`${process.env.BASE_URL}${item.image.path}`}
                       alt={item.title}
                       width={50}
                       height={50}

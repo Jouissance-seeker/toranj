@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 
 type IParams = {
   endpoint: string;
-  method: 'get' | 'post' | 'put' | 'delete';
+  method: 'get' | 'post' | 'put' | 'delete' | 'patch';
   contentType: 'json' | 'form-data';
   body?: Record<string, any> | FormData;
 };
@@ -16,7 +16,6 @@ type TReturn<T> = {
 export async function fetcher<T>(params: IParams): Promise<TReturn<T>> {
   const headers: HeadersInit = {};
   let bodyData: BodyInit | undefined;
-  const BASE_URL = 'http://localhost:5000';
   const cookieStore = await cookies();
   const token = cookieStore.get('token')?.value;
 
@@ -36,16 +35,34 @@ export async function fetcher<T>(params: IParams): Promise<TReturn<T>> {
     bodyData = params.body;
   }
 
-  const response = await fetch(`${BASE_URL}${params.endpoint}`, {
-    method: params.method,
+  const response = await fetch(`${process.env.BASE_URL}${params.endpoint}`, {
+    method: params.method.toLocaleUpperCase(),
     headers,
     body: bodyData,
   });
+
+  if (!response.ok) {
+    console.error('Fetch failed:', {
+      status: response.status,
+      statusText: response.statusText,
+      url: response.url,
+      body: await response.text(), // Log the response body for debugging
+    });
+  }
+
   const data = await response.json();
+  const status = !response.ok ? 'fail' : 'success';
+  const message = (() => {
+    if (response.ok) {
+      return data.message || 'عملیات با موفقیت انجام شد!';
+    } else {
+      return data.message || 'خطا در انجام عملیات!';
+    }
+  })();
 
   return {
-    data: data,
-    message: data.message,
-    status: !response.ok ? 'fail' : 'success',
+    data,
+    message,
+    status,
   };
 }

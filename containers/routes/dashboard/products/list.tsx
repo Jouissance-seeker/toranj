@@ -18,6 +18,7 @@ export function List() {
     queryKey: ['products'],
     queryFn: () => APIgetProducts(),
   });
+  console.log(fetchProducts.data);
   const addProductToggleUrlState = useToggleUrlState('add-product');
   const handleShowModalAddProduct = () => {
     addProductToggleUrlState.show();
@@ -108,7 +109,7 @@ export function List() {
                   <td className="px-4 py-1">{index + 1}</td>
                   <td className="px-4 py-1 text-center">
                     <Image
-                      src={item.image}
+                      src={`${process.env.BASE_URL}${item.image.path}`}
                       alt={item.title}
                       width={60}
                       height={60}

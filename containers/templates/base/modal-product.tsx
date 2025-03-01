@@ -15,7 +15,9 @@ export function ModalProduct() {
   const searchParams = useSearchParams();
   const data = {
     _id: String(searchParams.get('id') ?? ''),
-    image: searchParams.get('image') || '',
+    image: {
+      path: searchParams.get('image') || '',
+    },
     title: searchParams.get('title') || '',
     description: searchParams.get('description') || '',
     discount: Number(searchParams.get('discount')) || 0,
@@ -62,7 +64,7 @@ export function ModalProduct() {
           <>
             {/* image */}
             <Image
-              src={data.image}
+              src={data.image.path}
               alt={data.title}
               width={130}
               height={130}

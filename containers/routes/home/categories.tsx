@@ -75,7 +75,7 @@ const Top = (props: ITopProps) => {
                 })}
               >
                 <Image
-                  src={item.image}
+                  src={`${process.env.BASE_URL}${item.image.path}`}
                   alt={item.title}
                   width={50}
                   height={50}
@@ -107,7 +107,7 @@ const Bottom = (props: IBottomProps) => {
     queryFn: () =>
       APIgetProductsByCategoryId({
         path: {
-          categoryId: fetchCategories.data?.[props.activedIndex]?._id ?? '0',
+          categoryId: String(fetchCategories.data?.[props.activedIndex]?._id),
         },
       }),
   });

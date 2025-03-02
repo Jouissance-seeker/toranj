@@ -7,6 +7,7 @@ import { FaHeart, FaHome, FaShoppingCart } from 'react-icons/fa';
 import { IoFastFood } from 'react-icons/io5';
 import { LuLogOut } from 'react-icons/lu';
 import { PiShoppingBagOpenFill } from 'react-icons/pi';
+import { TbLayoutDashboardFilled } from 'react-icons/tb';
 import { APIgetAuth } from '@/actions/templates/base/get-auth';
 import { APIlogout } from '@/actions/templates/base/logout';
 import { useToggleUrlState } from '@/hooks/toggle-url-state';
@@ -96,7 +97,7 @@ export function Header() {
                 className="relative hidden items-center gap-2 rounded-lg border border-yellow p-2 text-sm text-yellow transition-all hover:bg-yellow hover:text-teal lg:flex"
               >
                 <p className="whitespace-nowrap text-smp">پنل ادمین</p>
-                <LuLogOut size={25} />
+                <TbLayoutDashboardFilled size={25} />
               </Link>
             )}
             <Link

@@ -25,6 +25,7 @@ export function ModalEditProduct() {
       'category',
       'priceWithoutDiscount',
       'priceWithDiscount',
+      'image',
     ]);
     form.reset();
   };

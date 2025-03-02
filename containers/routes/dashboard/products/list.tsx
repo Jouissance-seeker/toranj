@@ -31,6 +31,7 @@ export function List() {
       priceWithoutDiscount: data.priceWithoutDiscount,
       category: data.category,
       id: data.id,
+      image: data.image,
     });
   };
 
@@ -136,6 +137,7 @@ export function List() {
                           priceWithoutDiscount: item.priceWithoutDiscount,
                           category: item.categoryID,
                           id: item._id,
+                          image: `${process.env.BASE_URL}${item.image.path}`,
                         })
                       }
                       className="mx-2"

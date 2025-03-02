@@ -26,6 +26,7 @@ export function List() {
     editCategoryToggleUrlState.show({
       title: data.title,
       id: data.id,
+      image: `${process.env.BASE_URL}${data.image.path}`,
     });
   };
   const handleDeleteCategory = async (id: string) => {

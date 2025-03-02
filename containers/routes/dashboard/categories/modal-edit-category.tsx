@@ -16,7 +16,7 @@ export function ModalEditCategory() {
   const searchParams = useSearchParams();
   const editCategoryToggleUrlState = useToggleUrlState('edit-category');
   const handleClose = () => {
-    editCategoryToggleUrlState.hide(['title', 'id']);
+    editCategoryToggleUrlState.hide(['title', 'id', 'image']);
     form.reset();
   };
   const queryClient = useQueryClient();

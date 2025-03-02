@@ -1,12 +1,19 @@
+import { useQuery } from '@tanstack/react-query';
 import { useKillua } from 'killua';
-import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { APIgetAuth } from '@/actions/templates/base/get-auth';
+import { useUpdateQuery } from '@/hooks/update-query';
 import { cartSlice } from '@/slices/cart';
 import { formatPrice } from '@/utils/format-price';
 
 export function PlaceOrder() {
   const localstorageCart = useKillua(cartSlice);
-  const router = useRouter();
+  const updateQuery = useUpdateQuery();
+  const fetchAuth = useQuery({
+    queryKey: ['auth'],
+    queryFn: () => APIgetAuth(),
+  });
+  const isLoggined = Boolean(fetchAuth.data);
 
   return (
     <section className="sticky top-3 flex h-fit w-full flex-1 flex-col rounded-xl border bg-white p-4">
@@ -35,9 +42,18 @@ export function PlaceOrder() {
       {/* go to payment btn */}
       <button
         onClick={() => {
-          router.push('/');
-          toast.success('سفارش شما با موفقیت ثبت شد!');
-          localstorageCart.reducers.reset();
+          if (isLoggined) {
+            toast.success('سفارش شما با موفقیت ثبت شد!');
+            localstorageCart.reducers.reset();
+          } else {
+            toast.error('لطفا وارد حساب کاربری خود شوید!');
+            updateQuery((prev) => {
+              return {
+                ...prev,
+                'toggle-login': true,
+              };
+            });
+          }
         }}
         className="mt-4 w-full rounded-lg bg-teal py-3 text-center text-white"
       >

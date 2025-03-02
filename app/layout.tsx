@@ -8,7 +8,6 @@ import Providers from './providers';
 
 export const metadata: Metadata = {
   title: 'ترنج',
-  description: 'توسعه دهنده : حمید شاهسونی',
 };
 
 const peyda = localFont({ src: '../public/fonts/peyda.woff2' });

@@ -121,14 +121,20 @@ export function ModalProduct() {
               <div>
                 <div
                   className={cn('flex gap-2', {
-                    hidden: data.discount === 0,
+                    hidden:
+                      data.priceWithoutDiscount === data.priceWithDiscount,
                   })}
                 >
                   <p className="text-sm text-gray-500 line-through">
                     {formatPrice(Number(data.priceWithoutDiscount))}
                   </p>
                   <p className="rounded-md bg-yellow px-2 py-0.5 text-sm text-white">
-                    %{data.discount}
+                    %
+                    {Math.round(
+                      ((data.priceWithoutDiscount - data.priceWithDiscount) /
+                        data.priceWithoutDiscount) *
+                        100,
+                    )}
                   </p>
                 </div>
                 <p>{formatPrice(Number(data.priceWithDiscount))}</p>

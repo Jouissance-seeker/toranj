@@ -40,7 +40,6 @@ export function ProductCard({ data }: IProductCardProps) {
       image: `${process.env.BASE_URL}${data.image.path}`,
       title: data.title,
       description: data.description,
-      discount: String(data.discount),
       priceWithoutDiscount: String(data.priceWithoutDiscount),
       priceWithDiscount: String(data.priceWithDiscount),
     });
@@ -111,14 +110,19 @@ export function ProductCard({ data }: IProductCardProps) {
         <div>
           <div
             className={cn('flex gap-2', {
-              hidden: data.discount === 0,
+              hidden: data.priceWithoutDiscount === data.priceWithDiscount,
             })}
           >
             <p className="text-sm text-gray-500 line-through">
               {formatPrice(Number(data.priceWithoutDiscount))}
             </p>
             <p className="rounded-md bg-yellow px-2 py-0.5 text-sm text-white">
-              %{data.discount}
+              %
+              {Math.round(
+                ((data.priceWithoutDiscount - data.priceWithDiscount) /
+                  data.priceWithoutDiscount) *
+                  100,
+              )}
             </p>
           </div>
           <p className="text-center font-bold">

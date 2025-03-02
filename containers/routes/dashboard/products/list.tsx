@@ -18,7 +18,6 @@ export function List() {
     queryKey: ['products'],
     queryFn: () => APIgetProducts(),
   });
-  console.log(fetchProducts.data);
   const addProductToggleUrlState = useToggleUrlState('add-product');
   const handleShowModalAddProduct = () => {
     addProductToggleUrlState.show();

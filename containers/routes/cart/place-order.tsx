@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useKillua } from 'killua';
 import toast from 'react-hot-toast';
+import { APIsendCartItems } from '@/actions/routes/cart/send-cart-items';
 import { APIgetAuth } from '@/actions/templates/base/get-auth';
 import { useUpdateQuery } from '@/hooks/update-query';
 import { cartSlice } from '@/slices/cart';
@@ -14,6 +15,22 @@ export function PlaceOrder() {
     queryFn: () => APIgetAuth(),
   });
   const isLoggined = Boolean(fetchAuth.data);
+  const handleSendCartItems = async () => {
+    const res = await APIsendCartItems({
+      body: {
+        items: localstorageCart.get().map((item) => ({
+          productID: item._id,
+          quantity: item.quantity,
+        })),
+      },
+    });
+    if (res.status === 'success') {
+      toast.success(res.message);
+      localstorageCart.reducers.reset();
+    } else {
+      toast.error(res.message);
+    }
+  };
 
   return (
     <section className="sticky top-3 flex h-fit w-full flex-1 flex-col rounded-xl border bg-white p-4">
@@ -43,8 +60,7 @@ export function PlaceOrder() {
       <button
         onClick={() => {
           if (isLoggined) {
-            toast.success('سفارش شما با موفقیت ثبت شد!');
-            localstorageCart.reducers.reset();
+            handleSendCartItems();
           } else {
             toast.error('لطفا وارد حساب کاربری خود شوید!');
             updateQuery((prev) => {

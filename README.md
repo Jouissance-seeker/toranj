@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/sys113/toranj/main/screenshot.jpg" style="border-radius:50%">
+  <img src="https://raw.githubusercontent.com/jouissance-seeker/toranj/main/screenshot.jpg" style="border-radius:50%">
 </div>
 
 ---

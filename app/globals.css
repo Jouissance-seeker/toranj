@@ -25,6 +25,21 @@ body {
   @apply opacity-0 invisible;
 }
 
+.custom-scrollbar {
+  &::-webkit-scrollbar {
+    @apply size-2;
+  }
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    @apply bg-[#acacac] rounded-[10px];
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    @apply bg-[#a1a1a1];
+  }
+}
+
 form {
   div > div {
     @apply col-span-1 flex flex-col gap-1;

@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { FaHeart, FaHome, FaShoppingCart } from 'react-icons/fa';
 import { IoFastFood } from 'react-icons/io5';
@@ -58,6 +59,12 @@ export function Header() {
     setTimeout(() => window.location.reload(), 3000);
   };
   const isAdmin = fetchAuth.data?.role === 'ADMIN';
+
+  // show modal description in first render
+  const descriptionToggleUrlState = useToggleUrlState('description');
+  useEffect(() => {
+    descriptionToggleUrlState.show();
+  }, []);
 
   return (
     <header className="container">

@@ -46,8 +46,8 @@ export function ModalLogin() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      phoneNumber: '',
-      password: '',
+      phoneNumber: '09000000000',
+      password: 'aaaaaaaa',
     },
   });
   const handleSubmitForm = async () => {

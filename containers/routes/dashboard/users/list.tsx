@@ -94,7 +94,7 @@ export function List() {
                 <td>{item.phone}</td>
                 <td>{item.email}</td>
                 <td>{item.address}</td>
-                <td className="m-2 flex w-fit gap-2 rounded-md border border-teal p-1">
+                <td className="m-2 flex w-fit gap-2 rounded-md border border-teal !p-1">
                   <button
                     className={cn({
                       'bg-teal text-white px-2 pointer-events-none py-1 rounded-md':

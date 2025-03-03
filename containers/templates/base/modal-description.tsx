@@ -20,18 +20,6 @@ export function ModalDescription() {
         <p>توسعه بک-اند : محمد خطایی</p>
         <hr />
         <div>
-          <p>تکنولوژی های استفاده شده در فرانت-اند :</p>
-          <ul>
-            <li>1. nextjs</li>
-            <li>2. typescript</li>
-            <li>3. tailwind</li>
-            <li>4. killua</li>
-            <li>5. react-hook-form</li>
-            <li>6. ...</li>
-          </ul>
-        </div>
-        <hr />
-        <div>
           <p>قابلیت ها در سمت کاربر :</p>
           <ul>
             <li>
@@ -64,6 +52,18 @@ export function ModalDescription() {
               <p>11. حذف کاربر</p>
               <p>12. تغییر رول کاربر</p>
             </li>
+          </ul>
+        </div>
+        <hr />
+        <div>
+          <p>تکنولوژی های استفاده شده در فرانت-اند :</p>
+          <ul>
+            <li>1. nextjs</li>
+            <li>2. typescript</li>
+            <li>3. tailwind</li>
+            <li>4. killua</li>
+            <li>5. react-hook-form</li>
+            <li>6. ...</li>
           </ul>
         </div>
       </div>

@@ -57,57 +57,43 @@ export function List() {
 
   return (
     <section className="size-full overflow-hidden">
-      <div className="overflow-x-auto rounded-xl border border-gray-200">
-        <table className="w-full min-w-max table-auto text-right text-sm">
+      <div className="overflow-x-auto rounded-xl border border-teal/20">
+        <table className="w-full min-w-max table-auto text-right text-sm [&_td]:px-4 [&_td]:py-1 [&_th]:border-b [&_th]:border-gray-200 [&_th]:p-4 [&_th_p]:block [&_th_p]:text-sm [&_th_p]:font-medium [&_th_p]:leading-none [&_th_p]:antialiased">
           <thead className="bg-gray-200">
             <tr>
-              <th className="border-b border-gray-200 p-4">
-                <p className="block text-sm font-medium leading-none antialiased">
-                  #
-                </p>
+              <th>
+                <p>#</p>
               </th>
-              <th className="border-b border-gray-200 p-4">
-                <p className="block text-sm font-medium leading-none antialiased">
-                  نام
-                </p>
+              <th>
+                <p>نام</p>
               </th>
-              <th className="border-b border-gray-200 p-4">
-                <p className="block text-sm font-medium leading-none antialiased">
-                  نام خانوادگی
-                </p>
+              <th>
+                <p>نام خانوادگی</p>
               </th>
-              <th className="border-b border-gray-200 p-4">
-                <p className="block text-sm font-medium leading-none antialiased">
-                  شماره موبایل
-                </p>
+              <th>
+                <p>شماره موبایل</p>
               </th>
-              <th className="border-b border-gray-200 p-4">
-                <p className="block text-sm font-medium leading-none antialiased">
-                  ایمیل
-                </p>
+              <th>
+                <p>ایمیل</p>
               </th>
-              <th className="border-b border-gray-200 p-4">
-                <p className="block text-sm font-medium leading-none antialiased">
-                  آدرس
-                </p>
+              <th>
+                <p>آدرس</p>
               </th>
-              <th className="border-b border-gray-200 p-4">
-                <p className="block text-sm font-medium leading-none antialiased">
-                  سطح دسترسی
-                </p>
+              <th>
+                <p>سطح دسترسی</p>
               </th>
-              <th className="border-b border-gray-200 p-4" />
+              <th />
             </tr>
           </thead>
           <tbody>
             {fetchUsers.data?.map((item, index) => (
               <tr key={item._id} className="odd:bg-gray-50">
-                <td className="px-4 py-1">{index + 1}</td>
-                <td className="px-4 py-1">{item.name}</td>
-                <td className="px-4 py-1">{item.lastName}</td>
-                <td className="px-4 py-1">{item.phone}</td>
-                <td className="px-4 py-1">{item.email}</td>
-                <td className="px-4 py-1">{item.address}</td>
+                <td>{index + 1}</td>
+                <td>{item.name}</td>
+                <td>{item.lastName}</td>
+                <td>{item.phone}</td>
+                <td>{item.email}</td>
+                <td>{item.address}</td>
                 <td className="m-2 flex w-fit gap-2 rounded-md border border-teal p-1">
                   <button
                     className={cn({
@@ -138,7 +124,7 @@ export function List() {
                     admin
                   </button>
                 </td>
-                <td className="px-4 py-1 text-right">
+                <td className="text-right">
                   <button onClick={() => handleDeleteUser(item._id)}>
                     <IoMdTrash size={22} />
                   </button>

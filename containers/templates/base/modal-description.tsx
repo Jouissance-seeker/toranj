@@ -26,8 +26,8 @@ export function ModalDescription() {
             <li>2. typescript</li>
             <li>3. tailwind</li>
             <li>4. killua</li>
-            <li>5. swiper</li>
-            <li>6. react-hook-form</li>
+            <li>5. react-hook-form</li>
+            <li>6. ...</li>
           </ul>
         </div>
         <hr />

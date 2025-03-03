@@ -56,25 +56,19 @@ export function List() {
         افزودن دسته بندی
       </button>
       {/* table */}
-      <div className="relative flex size-full h-fit flex-col overflow-auto rounded-xl border border-gray-200 bg-white bg-clip-border text-gray-600">
+      <div className="relative flex size-full h-fit flex-col overflow-auto rounded-xl border border-teal/20 bg-white bg-clip-border text-gray-600">
         {fetchCategories.data?.length !== 0 ? (
-          <table className="w-full min-w-max table-auto text-right text-sm">
+          <table className="w-full min-w-max table-auto text-right text-sm [&_td]:px-4 [&_td]:py-1 [&_th]:border-b [&_th]:border-gray-200 [&_th]:p-4 [&_th_p]:block [&_th_p]:text-sm [&_th_p]:font-medium [&_th_p]:leading-none [&_th_p]:antialiased">
             <thead className="bg-gray-200">
               <tr>
-                <th className="border-b border-gray-200 p-3">
-                  <p className="block text-sm font-medium leading-none antialiased">
-                    #
-                  </p>
+                <th>
+                  <p>#</p>
                 </th>
-                <th className="border-b border-gray-200 p-3">
-                  <p className="block text-sm font-medium leading-none antialiased">
-                    تصویر
-                  </p>
+                <th>
+                  <p>تصویر</p>
                 </th>
-                <th className="border-b border-gray-200 p-3">
-                  <p className="block text-sm font-medium leading-none antialiased">
-                    عنوان
-                  </p>
+                <th>
+                  <p>عنوان</p>
                 </th>
                 <th />
               </tr>
@@ -82,8 +76,8 @@ export function List() {
             <tbody>
               {fetchCategories.data?.map((item, index) => (
                 <tr key={item._id} className="even:bg-gray-50">
-                  <td className="px-4 py-1">{index + 1}</td>
-                  <td className="px-4 py-1 text-center">
+                  <td>{index + 1}</td>
+                  <td className="text-center">
                     <Image
                       src={`${process.env.BASE_URL}${item.image.path}`}
                       alt={item.title}
@@ -91,10 +85,10 @@ export function List() {
                       height={50}
                     />
                   </td>
-                  <td className="max-w-[150px] truncate px-4 py-1 text-right">
+                  <td className="max-w-[150px] truncate text-right">
                     {item.title}
                   </td>
-                  <td className="px-4 py-1 text-right">
+                  <td className="text-right">
                     <button
                       onClick={() =>
                         handleShowModalEditCategory({

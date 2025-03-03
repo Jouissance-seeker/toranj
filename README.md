@@ -17,7 +17,15 @@
 * react-hook-form
 
 ---
-## contact me
-* *[email](mailto:051.SYS113@gmail.com)*
-* *[telegram](https://t.me/SYS113/)*
-* *[instagram](https://instagram.com/sys113/)*
+## features
+* signin/signup
+* get product with selected category
+* get all product
+* add/delete/edit category
+* add/delete product to favirate
+* add/delete product to cart
+* see product detail
+* get users
+* ban user
+* change role user
+* get orders

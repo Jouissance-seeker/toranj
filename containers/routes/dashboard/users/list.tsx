@@ -19,7 +19,7 @@ export function List() {
   }
 
   if (fetchUsers.data?.length === 0) {
-    return <Empty text="محصولی برای نمایش وجود ندارد!" />;
+    return <Empty text="کاربری برای نمایش وجود ندارد!" />;
   }
 
   const handleDeleteUser = async (id: string) => {

@@ -1,23 +1,22 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import Image from 'next/image';
-import { APIgetClientOrders } from '@/actions/routes/orders/get-client-orders';
+import { APIgetDashboardOrders } from '@/actions/routes/dashboard/orders/get-dashboard-orders';
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
 import { formatPrice } from '@/utils/format-price';
 
 export function List() {
   const fetchClientOrders = useQuery({
-    queryKey: ['client-orders'],
-    queryFn: () => APIgetClientOrders(),
+    queryKey: ['dashboard-orders'],
+    queryFn: () => APIgetDashboardOrders(),
   });
 
   if (fetchClientOrders.isLoading) {
     return <Loader />;
   }
 
-  if (fetchClientOrders.data?.length === 0) {
+  if (fetchClientOrders.data?.length !== 0) {
     return <Empty text="سفارشی برای نمایش وجود ندارد!" />;
   }
 
@@ -34,17 +33,22 @@ export function List() {
               </th>
               <th className="border-b border-gray-200 p-4">
                 <p className="block text-sm font-medium leading-none antialiased">
-                  تصویر
+                  نام
+                </p>
+              </th>{' '}
+              <th className="border-b border-gray-200 p-4">
+                <p className="block text-sm font-medium leading-none antialiased">
+                  نام خانوادگی
                 </p>
               </th>
               <th className="border-b border-gray-200 p-4">
                 <p className="block text-sm font-medium leading-none antialiased">
-                  عنوان
+                  آدرس
                 </p>
               </th>
               <th className="border-b border-gray-200 p-4">
                 <p className="block text-sm font-medium leading-none antialiased">
-                  توضیحات
+                  محصول
                 </p>
               </th>
               <th className="border-b border-gray-200 p-4">
@@ -70,34 +74,27 @@ export function List() {
             </tr>
           </thead>
           <tbody>
-            {fetchClientOrders.data?.map((item, index) =>
-              item.products.map((item) => (
-                <tr key={item.productID._id} className="even:bg-gray-50">
+            {fetchClientOrders.data?.map((itemOrder, index) =>
+              itemOrder.products.map((itemProduct) => (
+                <tr key={itemProduct.productID._id} className="even:bg-gray-50">
                   <td className="px-4 py-1">{index + 1}</td>
-                  <td className="px-4 py-1 text-center">
-                    <Image
-                      src={`${process.env.BASE_URL}${item.productID.image.path}`}
-                      alt={item.productID.title}
-                      width={50}
-                      height={50}
-                    />
-                  </td>
+                  <td className="px-4 py-1">{itemOrder.userID.name}</td>
+                  <td className="px-4 py-1">{itemOrder.userID.lastName}</td>
+                  <td className="px-4 py-1">{itemOrder.userID.address}</td>
                   <td className="max-w-[150px] truncate px-4 py-1 text-right">
-                    {item.productID.title}
-                  </td>
-                  <td className="max-w-[150px] truncate px-4 py-1 text-right">
-                    {item.productID.description}
+                    {itemProduct.productID.title}
                   </td>
                   <td className="px-4 py-1">
-                    {formatPrice(item.productID.priceWithDiscount)}
+                    {formatPrice(itemProduct.productID.priceWithDiscount)}
                   </td>
                   <td className="px-4 py-1">
-                    {formatPrice(item.productID.priceWithoutDiscount)}
+                    {formatPrice(itemProduct.productID.priceWithoutDiscount)}
                   </td>
-                  <td className="px-4 py-1">{item.quantity}</td>
+                  <td className="px-4 py-1">{itemProduct.quantity}</td>
                   <td className="px-4 py-1">
                     {formatPrice(
-                      Number(item.productID.priceWithDiscount) * item.quantity,
+                      Number(itemProduct.productID.priceWithDiscount) *
+                        itemProduct.quantity,
                     )}
                   </td>
                 </tr>

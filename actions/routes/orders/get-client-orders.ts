@@ -5,7 +5,7 @@ import { fetcher } from '@/utils/fetcher';
 
 type TReturn = Promise<TOrder[] | null>;
 
-export async function APIgetOrders(): TReturn {
+export async function APIgetClientOrders(): TReturn {
   const res = await fetcher<TOrder[]>({
     endpoint: '/orders',
     method: 'get',

@@ -5,5 +5,11 @@ export type TOrder = {
     productID: TProduct;
     quantity: 11;
   }[];
-  updatedAt: string;
+  userID: {
+    name: string;
+    lastName: string;
+    phone: string;
+    email: string;
+    address: string;
+  };
 };

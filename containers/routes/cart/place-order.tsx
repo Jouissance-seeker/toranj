@@ -1,5 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useKillua } from 'killua';
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { APIsendCartItems } from '@/actions/routes/cart/send-cart-items';
 import { APIgetAuth } from '@/actions/templates/base/get-auth';
@@ -10,6 +11,8 @@ import { formatPrice } from '@/utils/format-price';
 export function PlaceOrder() {
   const localstorageCart = useKillua(cartSlice);
   const updateQuery = useUpdateQuery();
+  const router = useRouter();
+  const queryClient = useQueryClient();
   const fetchAuth = useQuery({
     queryKey: ['auth'],
     queryFn: () => APIgetAuth(),
@@ -25,8 +28,12 @@ export function PlaceOrder() {
       },
     });
     if (res.status === 'success') {
+      await queryClient.refetchQueries({
+        queryKey: ['client-orders'],
+      });
       toast.success(res.message);
       localstorageCart.reducers.reset();
+      router.push('/orders');
     } else {
       toast.error(res.message);
     }

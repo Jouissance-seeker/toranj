@@ -5,11 +5,11 @@ import { fetcher } from '@/utils/fetcher';
 
 type TReturn = Promise<TUser[] | null>;
 
-export async function APIgetUsers(): TReturn {
-  const res = await fetcher<{ users: TUser[] }>({
-    endpoint: '/orders/all',
+export async function APIgetOrders(): TReturn {
+  const res = await fetcher<{ orders: any[] }>({
+    endpoint: '/orders/checkout',
     method: 'get',
     contentType: 'json',
   });
-  return res.data?.users || null;
+  return res.data?.orders || null;
 }

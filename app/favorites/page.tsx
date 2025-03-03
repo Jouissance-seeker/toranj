@@ -10,7 +10,7 @@ export default function Page() {
   const localstorageFavorite = useKillua(favoriteSlice);
 
   return (
-    <div className="container h-full">
+    <div className="container size-full">
       {localstorageFavorite.isReady ? (
         localstorageFavorite.selectors.isEmpty() ? (
           <Empty text="محصولی را لایک نکرده اید!" />

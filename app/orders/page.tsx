@@ -1,5 +1,11 @@
-import { OrdersList } from '@/containers/routes/orders/orders-list';
+'use client';
+
+import { List } from '@/containers/routes/orders/list';
 
 export default function Page() {
-  return <OrdersList />;
+  return (
+    <div className="container size-full">
+      <List />
+    </div>
+  );
 }

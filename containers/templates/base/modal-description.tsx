@@ -66,6 +66,17 @@ export function ModalDescription() {
             <li>6. ...</li>
           </ul>
         </div>
+        <hr />
+        <div>
+          <p>تکنولوژی های استفاده شده در بک-اند :</p>
+          <ul>
+            <li>Backend: Node.js, Express.js</li>
+            <li>Database: MongoDB, Mongoose</li>
+            <li>Security: bcrypt, JWT authentication</li>
+            <li>Validation: express-validator</li>
+            <li>Environment Management: dotenv</li>
+          </ul>
+        </div>
       </div>
     </ToggleSection>
   );

@@ -2,13 +2,13 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   env: {
-    BASE_URL: 'https://restaurant-production-34ba.up.railway.app',
+    BASE_URL: 'https://restaurant-kvn3.onrender.com',
   },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'restaurant-production-34ba.up.railway.app',
+        hostname: 'restaurant-kvn3.onrender.com',
         port: '',
         pathname: '/**',
         search: '',
